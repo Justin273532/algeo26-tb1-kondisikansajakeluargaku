@@ -1,6 +1,40 @@
 package algeo.modules;
 
 public class Utilities {
+
+    public static boolean isSquareMatrix(Matrix A) {
+        return A.row == A.col;
+    }
+
+    public static boolean isMatrixIdentity(Matrix A) {
+        if(!isSquareMatrix(A)) {
+            return false;
+        }
+        for (int i = 0; i < A.row; i++) {
+            for (int j = 0; j < A.col; j++) {
+                if (i == j) {
+                    if (A.value[i][j] != 1) {
+                        return false;
+                    }
+                }
+                else {
+                    if (A.value[i][j] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isValidMatrixAddSub(Matrix A, Matrix B) {
+        return (A.row == B.row) && (A.col == B.col);
+    }
+
+    public static boolean isValidMatrixMul(Matrix A, Matrix B) {
+        return (A.col == B.row);
+    }
+    
     public Matrix subMatrix(Matrix A, int r, int c) {
         Matrix B = new Matrix((A.row - 1), (A.col -1));
         int flagR = 0;
@@ -21,7 +55,7 @@ public class Utilities {
         }
         return B;
     }
-    public double Determinant( Matrix A){
+    public double Determinant(Matrix A){
         if(A.row  * A.col == 1)return A.value[0][0];
         double det = 0.00;
         int pow = 1;
