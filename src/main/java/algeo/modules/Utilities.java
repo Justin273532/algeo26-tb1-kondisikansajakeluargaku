@@ -35,14 +35,14 @@ public class Utilities {
         return (A.col == B.row);
     }
 
-        public static Matrix transposeMatrix(Matrix A) {
-        Matrix B = new Matrix(A.col, A.row);
-        for(int i=0; i<A.row; i++) {
-            for(int j=0; j<A.col; j++) {
-                B.value[j][i] = A.value[i][j];
-            }
+    public static Matrix transposeMatrix(Matrix A) {
+    Matrix B = new Matrix(A.col, A.row);
+    for(int i=0; i<A.row; i++) {
+        for(int j=0; j<A.col; j++) {
+            B.value[j][i] = A.value[i][j];
         }
-        return B;
+    }
+    return B;
     }
 
     public static Matrix matrixMultiplication(Matrix A, Matrix B) {
