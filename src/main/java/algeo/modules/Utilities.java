@@ -36,13 +36,13 @@ public class Utilities {
     }
 
     public static Matrix transposeMatrix(Matrix A) {
-    Matrix B = new Matrix(A.col, A.row);
-    for(int i=0; i<A.row; i++) {
-        for(int j=0; j<A.col; j++) {
-            B.value[j][i] = A.value[i][j];
+        Matrix B = new Matrix(A.col, A.row);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                B.value[j][i] = A.value[i][j];
+            }
         }
-    }
-    return B;
+        return B;
     }
 
     public static Matrix matrixMultiplication(Matrix A, Matrix B) {
@@ -79,6 +79,39 @@ public class Utilities {
         return C;
     }
 
+    public static Matrix copyMatrix(Matrix A) {
+        Matrix B = new Matrix(A.row, A.col);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                B.value[i][j] = A.value[i][j];
+            }
+        }
+        return B;
+    }
+
+    public static Matrix createMatrixIdentity(int order) {
+        Matrix A = new Matrix(order, order);
+        for(int i=0; i<order; i++) {
+            for(int j=0; j<order; j++) {
+                if(i == j) {
+                    A.value[i][j] = 1;
+                }
+                else {
+                    A.value[i][j] = 0;
+                }
+            }
+        }
+        return A;
+    }
+
+    public static Matrix replaceColumn(Matrix A, Matrix B, int colidx) {
+        Matrix C = copyMatrix(A);
+        for(int i=0; i<A.row; i++) {
+            C.value[i][colidx] = B.value[i][0];
+        }
+        return C;
+    }
+
     public Matrix subMatrix(Matrix A, int r, int c) {
         Matrix B = new Matrix((A.row - 1), (A.col -1));
         int flagR = 0;
@@ -99,6 +132,7 @@ public class Utilities {
         }
         return B;
     }
+
     public double Determinant(Matrix A){
         if(A.row  * A.col == 1)return A.value[0][0];
         double det = 0.00;
