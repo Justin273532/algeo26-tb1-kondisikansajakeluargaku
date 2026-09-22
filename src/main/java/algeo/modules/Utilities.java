@@ -112,7 +112,7 @@ public class Utilities {
         return C;
     }
 
-    public Matrix subMatrix(Matrix A, int r, int c) {
+    public static Matrix subMatrix(Matrix A, int r, int c) {
         Matrix B = new Matrix((A.row - 1), (A.col -1));
         int flagR = 0;
         int flagC = 0;
@@ -143,16 +143,7 @@ public class Utilities {
         }
         return det;
     }
-  
-    public static Matrix TransposeMatrix(Matrix A){
-        Matrix B = new Matrix(A.col, A.row);
-        for(int i = 0; i < A.row; i++){
-            for(int j = 0; j < A.col; j++){
-                B.value[j][i] = A.value[i][j];
-            }
-        }
-        return B;
-    }
+
   
     public static int power(int x, int y){
         if(y == 0)return 1;
@@ -164,7 +155,7 @@ public class Utilities {
         Matrix B = new Matrix(A.row, A.col);
         for(int i=0; i<A.row; i++){
            for(int j=0; j<A.col; j++){
-               B.value[i][j] = power(-1, (i + j) % 2) * A.value[i][j] * Determinan(subMatrix(A, i, j)); 
+               B.value[i][j] = power(-1, (i + j) % 2) * A.value[i][j] * Determinant(subMatrix(A, i, j)); 
            }
         }
         return B;
@@ -180,6 +171,6 @@ public class Utilities {
     }
   
     public static Matrix InverseMatrix(Matrix A){
-        return ScalarMatrixMul(TransposeMatrix(Cofactor(Matrix A)), 1/Determinant(A));
+        return ScalarMatrixMul(transposeMatrix(Cofactor(A)), 1/Determinant(A));
     }
 }
