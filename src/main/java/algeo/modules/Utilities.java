@@ -81,11 +81,7 @@ public class Utilities {
 
     public static Matrix copyMatrix(Matrix A) {
         Matrix B = new Matrix(A.row, A.col);
-        for(int i=0; i<A.row; i++) {
-            for(int j=0; j<A.col; j++) {
-                B.value[i][j] = A.value[i][j];
-            }
-        }
+        B.value = A.value.clone();
         return B;
     }
 
@@ -136,10 +132,8 @@ public class Utilities {
     public static double Determinant(Matrix A){
         if(A.row  * A.col == 1)return A.value[0][0];
         double det = 0.00;
-        int pow = 1;
         for(int i=0; i<A.row; i++){
-            det += pow*A.value[i][0]*Determinant(subMatrix(A, i, 0));
-            pow *= -1;
+            det += power(-1, i % 2)*A.value[i][0]*Determinant(subMatrix(A, i, 0));
         }
         return det;
     }
@@ -148,8 +142,8 @@ public class Utilities {
     public static int power(int x, int y){
         if(y == 0)return 1;
         if(y == 1)return x;
-        return power(x*x, y / 2)*power(x, y % 2);
-    }
+        return power(x * x, y / 2) * power(x, y % 2);
+    } 
   
     public static Matrix Cofactor(Matrix A){
         Matrix B = new Matrix(A.row, A.col);
@@ -162,8 +156,8 @@ public class Utilities {
     }
   
     public static Matrix ScalarMatrixMul(Matrix A, double x){
-        for(int i=0; i < A.row; i++){
-            for(int j=0; j < A.col; j++){
+        for(int i = 0; i < A.row; i++){
+            for(int j = 0; j < A.col; j++){
                A.value[i][j] *= x;
             }
         }
@@ -172,5 +166,22 @@ public class Utilities {
   
     public static Matrix InverseMatrix(Matrix A){
         return ScalarMatrixMul(transposeMatrix(Cofactor(A)), 1/Determinant(A));
+    }
+
+    public static double DeterminantOBE(Matrix A){
+        Matrix B = copyMatrix(A);
+        int p = 0;
+        double det = 1.00;
+        for(int i = 0; i < B.row; i++){
+            if(B.value[i][i] == 0.00){
+                OBE.swapRow(B, i, i);
+                p++;
+            }
+            det *= B.value[i][i];
+            for(int j=i+1; j<B.row; j++){
+                OBE.addMultipleRow(B, -B.value[j][i]/B.value[i][i], j, i);
+            }
+        }
+        return det * power(-1, p % 2);
     }
 }
