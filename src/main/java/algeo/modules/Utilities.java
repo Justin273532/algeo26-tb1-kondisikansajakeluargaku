@@ -132,8 +132,8 @@ public class Utilities {
         }
         return B;
     }
-
-    public double Determinant(Matrix A){
+  
+    public static double Determinant(Matrix A){
         if(A.row  * A.col == 1)return A.value[0][0];
         double det = 0.00;
         int pow = 1;
@@ -142,5 +142,44 @@ public class Utilities {
             pow *= -1;
         }
         return det;
+    }
+  
+    public static Matrix TransposeMatrix(Matrix A){
+        Matrix B = new Matrix(A.col, A.row);
+        for(int i = 0; i < A.row; i++){
+            for(int j = 0; j < A.col; j++){
+                B.value[j][i] = A.value[i][j];
+            }
+        }
+        return B;
+    }
+  
+    public static int power(int x, int y){
+        if(y == 0)return 1;
+        if(y == 1)return x;
+        return power(x*x, y / 2)*power(x, y % 2);
+    }
+  
+    public static Matrix Cofactor(Matrix A){
+        Matrix B = new Matrix(A.row, A.col);
+        for(int i=0; i<A.row; i++){
+           for(int j=0; j<A.col; j++){
+               B.value[i][j] = power(-1, (i + j) % 2) * A.value[i][j] * Determinan(subMatrix(A, i, j)); 
+           }
+        }
+        return B;
+    }
+  
+    public static Matrix ScalarMatrixMul(Matrix A, double x){
+        for(int i=0; i < A.row; i++){
+            for(int j=0; j < A.col; j++){
+               A.value[i][j] *= x;
+            }
+        }
+        return A;
+    }
+  
+    public static Matrix InverseMatrix(Matrix A){
+        return ScalarMatrixMul(TransposeMatrix(Cofactor(Matrix A)), 1/Determinant(A));
     }
 }
