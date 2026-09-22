@@ -34,8 +34,85 @@ public class Utilities {
     public static boolean isValidMatrixMul(Matrix A, Matrix B) {
         return (A.col == B.row);
     }
-    
-    public static Matrix subMatrix(Matrix A, int r, int c) {
+
+    public static Matrix transposeMatrix(Matrix A) {
+        Matrix B = new Matrix(A.col, A.row);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                B.value[j][i] = A.value[i][j];
+            }
+        }
+        return B;
+    }
+
+    public static Matrix matrixMultiplication(Matrix A, Matrix B) {
+        Matrix C = new Matrix(A.row, B.col);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<B.col; j++) {
+                double sumelement = 0;
+                for(int k=0; k<A.col; k++) {
+                    sumelement += A.value[i][k] * B.value[k][j];
+                }
+                C.value[i][j] = sumelement;
+            }
+        }
+        return C;
+    }
+
+    public static Matrix matrixAddition(Matrix A, Matrix B) {
+        Matrix C = new Matrix(A.row, A.col);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                C.value[i][j] = A.value[i][j] + B.value[i][j];
+            }
+        }
+        return C;
+    }
+
+    public static Matrix matrixSubtraction(Matrix A, Matrix B) {
+        Matrix C = new Matrix(A.row, A.col);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                C.value[i][j] = A.value[i][j] - B.value[i][j];
+            }
+        }
+        return C;
+    }
+
+    public static Matrix copyMatrix(Matrix A) {
+        Matrix B = new Matrix(A.row, A.col);
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                B.value[i][j] = A.value[i][j];
+            }
+        }
+        return B;
+    }
+
+    public static Matrix createMatrixIdentity(int order) {
+        Matrix A = new Matrix(order, order);
+        for(int i=0; i<order; i++) {
+            for(int j=0; j<order; j++) {
+                if(i == j) {
+                    A.value[i][j] = 1;
+                }
+                else {
+                    A.value[i][j] = 0;
+                }
+            }
+        }
+        return A;
+    }
+
+    public static Matrix replaceColumn(Matrix A, Matrix B, int colidx) {
+        Matrix C = copyMatrix(A);
+        for(int i=0; i<A.row; i++) {
+            C.value[i][colidx] = B.value[i][0];
+        }
+        return C;
+    }
+
+    public Matrix subMatrix(Matrix A, int r, int c) {
         Matrix B = new Matrix((A.row - 1), (A.col -1));
         int flagR = 0;
         int flagC = 0;
