@@ -174,7 +174,7 @@ public class Utilities {
         double det = 1.00;
         for(int i = 0; i < B.row; i++){
             if(B.value[i][i] == 0.00){
-                OBE.swapRow(B, i, i);
+                OBE.swapRow(B, i, OBE.findPivotRow(B, i, i));
                 p++;
             }
             det *= B.value[i][i];
@@ -183,5 +183,24 @@ public class Utilities {
             }
         }
         return det * power(-1, p % 2);
+    }
+
+    public static Matrix InverseMatrixAugmented(Matrix A){
+        Matrix B = copyMatrix(A);
+        Matrix C = createMatrixIdentity(A.row);
+
+        for(int i = 0; i < B.row; i++){
+            int pivotrow = OBE.findPivotRow(B, i, i);
+            OBE.swapRow(B, i, pivotrow);
+            OBE.swapRow(C, i, pivotrow);
+            OBE.multiplyRow(C, 1/B.value[i][i], i);
+            OBE.multiplyRow(B, 1/B.value[i][i], i);
+            for(int j=0; j<B.row; j++){
+                if(j == i) continue;
+                OBE.addMultipleRow(C, -B.value[j][i]/B.value[i][i], j, i);
+                OBE.addMultipleRow(B, -B.value[j][i]/B.value[i][i], j, i);
+            }
+        }
+        return C;
     }
 }
