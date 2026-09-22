@@ -87,7 +87,7 @@ public class Utilities {
         Matrix B = new Matrix(A.row, A.col);
         for(int i=0; i<A.row; i++){
            for(int j=0; j<A.col; j++){
-               B.value[i][j] = power(-1, i + j) * A.value[i][j] * Determinan(subMatrix(A, i, j)); 
+               B.value[i][j] = power(-1, (i + j) % 2) * A.value[i][j] * Determinan(subMatrix(A, i, j)); 
            }
         }
         return B;
