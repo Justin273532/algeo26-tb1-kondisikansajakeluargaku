@@ -2,6 +2,38 @@ package algeo.modules;
 
 public class Utilities {
 
+    public static Matrix createMatrix(int row, int col) {
+        Matrix A = new Matrix(row, col);
+        return A;
+    }
+
+    public static void showMatrix(Matrix A) {
+        System.out.print("[");
+        for(int i=0; i<A.row; i++) {
+            System.out.print("[");
+            for(int j=0; j<A.col; j++) {
+                System.out.printf("%.3f", A.value[i][j]);
+                if(j < A.col-1) {
+                    System.out.print(" ");
+                }
+
+            }
+            if(i < A.row-1) {
+                System.out.println();
+                System.out.print(" ");
+            }
+        }
+        System.out.print("]");
+    }
+
+    public static void setMatrixElement(Matrix A, int row, int col, double val) {
+        A.value[row][col] = val;
+    }
+
+    public static double getMatrixElement(Matrix A, int row, int col) {
+        return A.value[row][col];
+    }
+
     public static boolean isSquareMatrix(Matrix A) {
         return A.row == A.col;
     }
