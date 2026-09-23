@@ -1,7 +1,10 @@
 package algeo.modules;
+import java.util.Scanner;
 
 public class Utilities {
 
+    public static Scanner input = new Scanner(System.in);
+    
     public static Matrix createMatrix(int row, int col) {
         Matrix A = new Matrix(row, col);
         return A;
