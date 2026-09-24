@@ -81,6 +81,9 @@ public class Utilities {
     }
 
     public static Matrix matrixMultiplication(Matrix A, Matrix B) {
+        if(!isValidMatrixMul(A, B)) {
+            throw new IllegalArgumentException("Matrix tidak dapat dikalikan karena jumlah kolom matrix A tidak sama dengan jumlah baris matrix B.");
+        }
         Matrix C = new Matrix(A.row, B.col);
         for(int i=0; i<A.row; i++) {
             for(int j=0; j<B.col; j++) {
@@ -95,6 +98,9 @@ public class Utilities {
     }
 
     public static Matrix matrixAddition(Matrix A, Matrix B) {
+        if(!isValidMatrixAddSub(A, B)) {
+            throw new IllegalArgumentException("Matrix tidak dapat dijumlahkan karena ukuran matrix tidak sama.");
+        }
         Matrix C = new Matrix(A.row, A.col);
         for(int i=0; i<A.row; i++) {
             for(int j=0; j<A.col; j++) {
@@ -105,6 +111,9 @@ public class Utilities {
     }
 
     public static Matrix matrixSubtraction(Matrix A, Matrix B) {
+        if(!isValidMatrixAddSub(A, B)) {
+            throw new IllegalArgumentException("Matrix tidak dapat dikurangkan karena ukuran matrix tidak sama.");
+        }
         Matrix C = new Matrix(A.row, A.col);
         for(int i=0; i<A.row; i++) {
             for(int j=0; j<A.col; j++) {
@@ -165,6 +174,9 @@ public class Utilities {
     }
   
     public static double Determinant(Matrix A){
+        if(!isSquareMatrix(A)) {
+            throw new IllegalArgumentException("Matrix harus berbentuk persegi untuk menghitung determinan.");
+        }
         if(A.row  * A.col == 1)return A.value[0][0];
         double det = 0.00;
         for(int i=0; i<A.row; i++){
@@ -200,10 +212,19 @@ public class Utilities {
     }
   
     public static Matrix InverseMatrix(Matrix A){
+        if(!isSquareMatrix(A)) {
+            throw new IllegalArgumentException("Matrix harus berbentuk persegi untuk menghitung invers.");
+        }
+        if(Determinant(A) == 0){
+            throw new IllegalArgumentException("Matrix tidak memiliki invers atau bersifat singularkarena determinan = 0.");
+        }
         return ScalarMatrixMul(transposeMatrix(Cofactor(A)), 1/Determinant(A));
     }
 
     public static double DeterminantOBE(Matrix A){
+        if(!isSquareMatrix(A)) {
+            throw new IllegalArgumentException("Matrix harus berbentuk persegi untuk menghitung determinan.");
+        }
         Matrix B = copyMatrix(A);
         int p = 0;
         double det = 1.00;
@@ -221,11 +242,17 @@ public class Utilities {
     }
 
     public static Matrix InverseMatrixAugmented(Matrix A){
+        if(!isSquareMatrix(A)) {
+            throw new IllegalArgumentException("Matrix harus berbentuk persegi untuk menghitung invers.");
+        }
         Matrix B = copyMatrix(A);
         Matrix C = createMatrixIdentity(A.row);
-
+        
         for(int i = 0; i < B.row; i++){
             int pivotrow = OBE.findPivotRow(B, i, i);
+            if(B.value[pivotrow][i] == 0.) { 
+                throw new IllegalArgumentException("Matrix tidak memiliki invers atau bersifat singular karena determinan = 0.");
+            }
             OBE.swapRow(B, i, pivotrow);
             OBE.swapRow(C, i, pivotrow);
             OBE.multiplyRow(C, 1/B.value[i][i], i);
