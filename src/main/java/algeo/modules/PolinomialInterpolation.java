@@ -3,6 +3,12 @@ package algeo.modules;
 public class PolinomialInterpolation {
 
     public static Matrix createAugmentedMatrix(Matrix A, Matrix b) {
+        if(A == null || b == null) {
+            throw new IllegalArgumentException("Matrix A dan b tidak boleh kosong.");
+        }
+        if(A.row != b.row || b.col != 1) {
+            throw new IllegalArgumentException("Jumlah baris matrix A harus sama dengan jumlah baris matrix b dan matrix b harus punya tepat 1 kolom.");
+        }
         Matrix Ab = Utilities.createMatrix(A.row, A.col + b.col);
         for(int i=0; i<A.row; i++) {
             for(int j=0; j<A.col+b.col; j++) {
@@ -17,6 +23,15 @@ public class PolinomialInterpolation {
         return Ab;
     }
     public static Matrix Interpolate(Matrix Point) {
+        if(Point == null) {
+            throw new IllegalArgumentException("Matrix tidak boleh kosong.");
+        }
+        if(Point.col != 2) {
+            throw new IllegalArgumentException("Matrix harus memiliki tepat 2 kolom untuk interpolasi polinomial.");
+        }
+        if(Point.row < 2) {
+            throw new IllegalArgumentException("Matrix harus memiliki setidaknya 2 baris untuk interpolasi polinomial.");
+        }
         Matrix A = Utilities.createMatrix(Point.row,Point.row);
         Matrix b = Utilities.createMatrix(Point.row, 1);
         for(int i=0; i<Point.row; i++) {
