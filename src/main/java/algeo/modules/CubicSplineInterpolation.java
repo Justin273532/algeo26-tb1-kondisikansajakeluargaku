@@ -1,12 +1,7 @@
 package algeo.modules;
 
-
-import algeo.modules.GaussJordanElim;
-import algeo.modules.Matrix;
-import algeo.modules.Utilities;
-
 public class CubicSplineInterpolation {
-    public void interpolate() {
+    public void cubicSplineInterpolate() {
         // Input N
         System.out.println("Masukkan N: ");
         int N = Utilities.input.nextInt();

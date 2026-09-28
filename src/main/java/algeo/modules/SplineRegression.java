@@ -1,7 +1,5 @@
 package algeo.modules;
 
-import java.util.Scanner;
-
 public class SplineRegression {
     public void calculate() {
 
