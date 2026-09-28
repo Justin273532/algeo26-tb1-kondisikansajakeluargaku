@@ -66,4 +66,28 @@ Untuk menggunakan JavaFX, sesuaikan kelas `App.java`, kemudian jalankan:
 mvn clean javafx:run
 ```
 
+## Fitur Program
+### 1. SPL
+- Metode Eliminasi Gauss
+- Metode Eliminasi Gauss-Jordan
+- Kaidah Cramer
+
+### 2. Determinan
+- Determinan dengan Metode OBE
+- Determinan dengan Metode Kofaktor 
+
+### 3. Invers
+- Invers dengan Metode Matriks Augmented
+- Invers dengan Metode Kofaktor
+
+### 4. Interpolasi
+- Interpolasi Polinomial
+- Interpolasi Spline Kubik
+
+### 5. Regresi
+- Regresi Spline Kubik
+
+### 6. Image Inpainting
+- Image Restoration dengan Metode Gauss-Seidel
+
 Lengkapi kembali README kelompok dengan deskripsi program, alur penggunaan, dan cara menjalankan program sebelum pengumpulan.
