@@ -78,9 +78,4 @@ public class SplineRegression {
         System.out.print("]");
     
     }
-
-    public static void main(String[] args){
-        SplineRegression sr = new SplineRegression();
-        sr.calculate();
-    }
 }
