@@ -1,15 +1,12 @@
 package algeo.modules;
 import javax.imageio.ImageIO;
 
-import algeo.modules.Matrix;
-import algeo.modules.Utilities;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class ImageRestoration {
-    public void jalankan() {
+    public void restoreImage() {
         try{
             // Terima input gambar
             System.out.print("Masukkan path gambar asli: ");
@@ -121,8 +118,5 @@ public class ImageRestoration {
         } catch (IOException e){
             System.out.println("Terjadi kesalahan saat memperbaiki gambar: " +e.getMessage());
         }
-    }
-    public static void main(String[] args) {
-    new ImageRestoration().jalankan();
     }
 }
