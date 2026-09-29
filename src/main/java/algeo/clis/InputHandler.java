@@ -1,36 +1,50 @@
-package algeo.modules;
 package algeo.clis;
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class InputHandler {
     static final BufferedReader BR = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     
-    public bool inputError_Int;
-    public bool inputError_Double;
+    public boolean inputError_Int;
+    public boolean inputError_Double;
     
-    public static int inputInt(){
-        String s = BR.readLine();
+    public int inputInt(){
+        String s;
+        try {
+            s = BR.readLine();
+        } catch (Exception e) {
+            inputError_Int = true;
+            System.err.println(e);
+            return 0;
+        }
         int x = 0;
         for(int i = 0; i < s.length(); i++){
-            if(s[i] < '0' || s[i] > '9') {
+            if(s.indexOf(i) < '0' || s.indexOf(i) > '9') {
                 this.inputError_Int = true;
                 return 0;
             }
             x *= 10;
-            x += (s[i]-'0');
+            x += (s.indexOf(i)-'0');
         }
         return x;
     }
-    public static double inputDouble(){
-        String s = BR.readLine();
+    public double inputDouble(){
+        String s;
+        try {
+            s = BR.readLine();
+        } catch (Exception e) {
+            inputError_Int = true;
+            System.err.println(e);
+            return 0;
+        }
         int coma = -1;
         double x = 0.0;
         for(int i = 0; i < s.length(); i++){
-            if(s[i] >= 0 && s[i] <= 9){
+            if(s.indexOf(i) >= 0 && s.indexOf(i) <= 9){
                 x *= 10;
-                x += (s[i]-'0');  
-            }else if(s[i] == ',' || s[i] == '.'){
+                x += (s.indexOf(i)-'0');  
+            }else if(s.indexOf(i) == ',' || s.indexOf(i) == '.'){
                 if(coma != -1){
                   this.inputError_Double = true;
                   return 0.00;
