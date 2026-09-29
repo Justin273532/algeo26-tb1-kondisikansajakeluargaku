@@ -11,7 +11,7 @@ public class CubicSplineInterpolation {
 
         // Input kumpulan data
         for (int i = 0; i < N; i++){
-            System.out.println("Masukkan nilai x dan y: ");
+            System.out.println("Masukkan nilai x dan y (format input x y): ");
             input_data[i][0] = Utilities.input.nextDouble();
             input_data[i][1] = Utilities.input.nextDouble();
         }
@@ -81,16 +81,52 @@ public class CubicSplineInterpolation {
             double yi = input_data[i][1];
             double yi_plus_1 = input_data[i + 1][1];
             
-            double a = yi;
-            double b = ((yi_plus_1 - yi)/h) - (h * (2.0 * M[i] + M[i + 1])/6.0);
-            double c = M[i] / 2.0;
-            double d = (M[i + 1] - M[i]) / (6.0 * h);
+            koef.value[i][0] = yi;
+            koef.value[i][1] = ((yi_plus_1 - yi)/h) - (h * (2.0 * M[i] + M[i + 1])/6.0);
+            koef.value[i][2] = M[i] / 2.0;
+            koef.value[i][3] = (M[i + 1] - M[i]) / (6.0 * h);
 
-            koef.value[i][0] = a;
-            koef.value[i][1] = b;
-            koef.value[i][2] = c;
-            koef.value[i][3] = d;
         }
 
+        System.out.println("Nilai turunan kedua pada setiap knot:");
+        for (int i = 0; i < N; i++){
+            System.out.println("M" + i + ": " + M[i]);
+        }
+
+        System.out.println("Persamaan polinom kubik untuk setiap segmen:");
+        for (int i = 0; i < N - 1; i++){
+            double a = koef.value[i][0];
+            double b = koef.value[i][1];
+            double c = koef.value[i][2];
+            double d = koef.value[i][3];
+            System.out.printf("S_%d(x) = %.3f + %.3f(x - %.3f) + %.3f(x - %.3f)^2 + %.3f(x - %.3f)^3\n", i, a, b, input_data[i][0], c, input_data[i][0], d, input_data[i][0]);
+            System.out.printf("Domain: [%.3f <= x <= %.3f]\n\n", input_data[i][0], input_data[i + 1][0]);
+        }
+
+        System.out.println("Masukkan nilai x untuk interpolasi: ");
+        double x = Utilities.input.nextDouble();
+        if (x >= input_data[0][0] && x <= input_data[N - 1][0]){
+            int segmen = 0;
+            for (int i = 0; i < N - 1; i++){
+                if (x >= input_data[i][0] && x <= input_data[i + 1][0]);
+                segmen = i;
+                break;
+            }
+
+            double xi = input_data[segmen][0];
+            double selisih = x - xi;
+            double a = koef.value[segmen][0];
+            double b = koef.value[segmen][1];
+            double c = koef.value[segmen][2];
+            double d = koef.value[segmen][3];
+            double hasil = a + b*selisih + c*Math.pow(selisih, 2) + d*Math.pow(selisih, 3);
+            System.out.println("Hasil interpolasi: " + hasil);
+        } else {
+            System.out.printf("Input berada di luar domain: [%.3f <= x <= %.3f]", input_data[0][0], input_data[N - 1][0]);
+        }
+
+    }
+    public static void main(String[] args) {
+    new CubicSplineInterpolation().interpolate();
     }
 }

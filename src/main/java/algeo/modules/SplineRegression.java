@@ -6,15 +6,6 @@ public class SplineRegression {
         System.out.println("Masukkan Jumlah Data:");
         int N = Utilities.input.nextInt(); // Baca Input
                 
-        System.out.println("Masukkan K:");
-        int K = Utilities.input.nextInt(); // Baca Input
-
-        double[] array_Xi = new double[K];
-        for(int i = 0; i < K; i++){
-            System.out.println("Masukkan Knot Xi-" + (i + 1) + ":");
-            array_Xi[i] = Utilities.input.nextDouble();
-        }
-
         double[] x = new double [N];
         Matrix Y = Utilities.createMatrix(N ,1); // Menyediakan matriks
 
@@ -24,6 +15,16 @@ public class SplineRegression {
             x[i] = Utilities.input.nextDouble();
             Y.value[i][0] = Utilities.input.nextDouble();
         }
+
+        System.out.println("Masukkan K:");
+        int K = Utilities.input.nextInt(); // Baca Input
+
+        double[] array_Xi = new double[K];
+        for(int i = 0; i < K; i++){
+            System.out.println("Masukkan Knot Xi-" + (i + 1) + ":");
+            array_Xi[i] = Utilities.input.nextDouble();
+        }
+
 
         int M = 4 + K;
         Matrix matriksjadi = Utilities.createMatrix(N, M);
@@ -66,6 +67,8 @@ public class SplineRegression {
         // Eliminasi gauss-jordan
         Matrix hasil = GaussJordanElim.toReducedRowEchelonFormMatrix(augmented);
 
+        // Mencetak koefisien regresi
+        System.out.println("Koefisien regresi: ");
         System.out.print("[");
         for (int i = 0; i < 4 + K; i++){
             if (i != 4 + K - 1 ){
@@ -76,6 +79,43 @@ public class SplineRegression {
             }
         }
         System.out.print("]");
+
+        // Mencetak posisi knot
+        System.out.println("Posisi knot: ");
+        System.out.print("[");
+        for (int i = 0; i < K; i++){
+            System.out.printf("%.3f", array_Xi[i]);
+        }
+        System.out.print("]");
+
+        System.out.println("Persamaan regresi:");
+        for (int i = 0; i < 4 + K; i++){
+            if (i <= 3){
+                if (i == 0){
+                    System.out.print(hasil.value[i][4 + K]);
+                } else {
+                    System.out.printf("%.3fx^" + i, hasil.value[i][4 + K]);
+                }
+            } else{
+                System.out.printf("%.3f(x - %.3f)^3", hasil.value[i][4 + K], array_Xi[i]);
+            }
+        }
+
+        System.out.print("Masukkan x untuk prediksi nilai: ");
+        double xt = Utilities.input.nextDouble();
+        if (xt >= x[0] && xt <= x[N - 1]){
+            double prediksi = 0;
+            for (int i = 0; i < 4 + K; i++){
+                if (i <= 3){
+                    prediksi = prediksi + hasil.value[i][4 + K] * Math.pow(xt, i);
+                } else{
+                    prediksi = prediksi + hasil.value[i][4 + K] * Math.pow((xt - array_Xi[i]), 3);
+                }
+            }
+        } else {
+            System.out.println("Error: x berada di luar batasan");
+        }
+
     
     }
 }
