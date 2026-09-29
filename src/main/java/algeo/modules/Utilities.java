@@ -125,7 +125,11 @@ public class Utilities {
 
     public static Matrix copyMatrix(Matrix A) {
         Matrix B = new Matrix(A.row, A.col);
-        B.value = A.value.clone();
+        for(int i=0; i<A.row; i++) {
+            for(int j=0; j<A.col; j++) {
+                B.value[i][j] = A.value[i][j];
+            }
+        }
         return B;
     }
 

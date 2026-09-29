@@ -22,7 +22,7 @@ public class PolinomialInterpolation {
         }
         return Ab;
     }
-    public static Matrix Interpolate(Matrix Point) {
+    public static Matrix polinomialInterpolate(Matrix Point) {
         if(Point == null) {
             throw new IllegalArgumentException("Matrix tidak boleh kosong.");
         }
