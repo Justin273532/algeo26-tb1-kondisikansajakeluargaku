@@ -1,5 +1,6 @@
 package algeo.clis;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
@@ -13,7 +14,7 @@ public class InputHandler {
         String s;
         try {
             s = BR.readLine();
-        } catch (Exception e) {
+        } catch (IOException e) {
             inputError_Int = true;
             System.err.println(e);
             return 0;
@@ -33,8 +34,8 @@ public class InputHandler {
         String s;
         try {
             s = BR.readLine();
-        } catch (Exception e) {
-            inputError_Int = true;
+        } catch (IOException e) {
+            inputError_Double = true;
             System.err.println(e);
             return 0;
         }
