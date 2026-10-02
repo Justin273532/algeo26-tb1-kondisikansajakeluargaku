@@ -36,4 +36,28 @@ For interpolation and spline operations, provide a matrix with two columns (`x y
 - `src/main/java/algeo/modules`: matrix operations and mathematical algorithms
 - `src/test/java`: JUnit regression tests
 
-The assignment specification was not included in this repository snapshot; the implementation follows the scope and constraints described in the project README and CLI.
+## Fitur Program
+### 1. SPL
+- Metode Eliminasi Gauss
+- Metode Eliminasi Gauss-Jordan
+- Kaidah Cramer
+
+### 2. Determinan
+- Determinan dengan Metode OBE
+- Determinan dengan Metode Kofaktor 
+
+### 3. Invers
+- Invers dengan Metode Matriks Augmented
+- Invers dengan Metode Kofaktor
+
+### 4. Interpolasi
+- Interpolasi Polinomial
+- Interpolasi Spline Kubik
+
+### 5. Regresi
+- Regresi Spline Kubik
+
+### 6. Image Inpainting
+- Image Restoration dengan Metode Gauss-Seidel
+
+Lengkapi kembali README kelompok dengan deskripsi program, alur penggunaan, dan cara menjalankan program sebelum pengumpulan.
