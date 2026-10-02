@@ -72,34 +72,49 @@ public class SplineRegression {
         System.out.print("[");
         for (int i = 0; i < 4 + K; i++){
             if (i != 4 + K - 1 ){
-                System.out.printf("%.3f ", hasil.value[i][4 + K]);
+                System.out.printf("%.3f, ", hasil.value[i][4 + K]);
             }
             else {
                 System.out.printf("%.3f", hasil.value[i][4 + K]);
             }
         }
-        System.out.print("]");
+        System.out.print("]\n");
 
         // Mencetak posisi knot
         System.out.println("Posisi knot: ");
         System.out.print("[");
         for (int i = 0; i < K; i++){
-            System.out.printf("%.3f", array_Xi[i]);
+            if (i != K - 1){
+                System.out.printf("%.3f, ", array_Xi[i]);
+            } else{
+                System.out.printf("%.3f", array_Xi[i]);
+            }
+            
         }
-        System.out.print("]");
+        System.out.print("]\n");
 
         System.out.println("Persamaan regresi:");
         for (int i = 0; i < 4 + K; i++){
             if (i <= 3){
                 if (i == 0){
-                    System.out.print(hasil.value[i][4 + K]);
+                    System.out.printf("%.3f", hasil.value[i][4 + K]);
                 } else {
-                    System.out.printf("%.3fx^" + i, hasil.value[i][4 + K]);
+                    if (hasil.value[i][4 + K] >= 0){
+                        System.out.printf(" + %.3fx^" + i + " ", hasil.value[i][4 + K]);
+                    } else {
+                        System.out.printf(" - %.3fx^" + i + " ", Math.abs(hasil.value[i][4 + K]));
+                    }
                 }
             } else{
-                System.out.printf("%.3f(x - %.3f)^3", hasil.value[i][4 + K], array_Xi[i - 4]);
+                if (hasil.value[i][4 + K] >= 0){
+                        System.out.printf(" + %.3f(x - %.3f)^3 ", hasil.value[i][4 + K], array_Xi[i - 4]);
+                    } else {
+                       System.out.printf(" - %.3f(x - %.3f)^3 ", Math.abs(hasil.value[i][4 + K]), array_Xi[i - 4]);
+                    }
+                
             }
         }
+        System.out.print("\n");
 
         System.out.print("Masukkan x untuk prediksi nilai: ");
         double prediksi = 0;
@@ -118,7 +133,7 @@ public class SplineRegression {
         } else {
             System.out.println("Error: x berada di luar batasan");
         }
-        System.out.println("Hasil prediksi: " + prediksi);
+        System.out.printf("Hasil prediksi: %.3f", prediksi);
 
     
     }
