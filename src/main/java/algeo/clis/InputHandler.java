@@ -1,4 +1,5 @@
 package algeo.clis;
+import algeo.modules.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -60,5 +61,40 @@ public class InputHandler {
             x /= Math.pow(10.0, coma);
         }
         return x;
+    }
+
+    public Matrix inputMatrix(){
+        System.out.print("Masukkan jumlah baris: ");
+        int row = inputInt();
+        if(inputError_Int){
+            inputError_Int = false;
+            System.err.println("Input jumlah baris tidak valid.");
+            return null;
+        }
+        System.out.print("Masukkan jumlah kolom: ");
+        int col = inputInt();
+        if(inputError_Int){
+            inputError_Int = false;
+            System.err.println("Input jumlah kolom tidak valid.");
+            return null;
+        }
+        return inputMatrix(row, col);
+    }
+
+    public Matrix inputMatrix(int row, int col){
+        Matrix A = new Matrix(row, col);
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                System.out.print("Masukkan elemen [" + (i + 1) + "][" + (j + 1) + "]: ");
+                double val = inputDouble();
+                if(inputError_Double){
+                    inputError_Double = false;
+                    System.err.println("Input elemen tidak valid.");
+                    return null;
+                }
+                A.value[i][j] = val;
+            }
+        }
+        return A;
     }
 }

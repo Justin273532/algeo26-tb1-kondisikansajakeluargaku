@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageRestoration {
-    public void restoreImage() {
+    public static void restoreImage() {
         try{
             // Terima input gambar
             System.out.print("Masukkan path gambar asli: ");

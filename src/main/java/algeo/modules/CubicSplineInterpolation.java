@@ -1,7 +1,7 @@
 package algeo.modules;
 
 public class CubicSplineInterpolation {
-    public void cubicSplineInterpolate() {
+    public static void cubicSplineInterpolate() {
         // Input N
         System.out.println("Masukkan N: ");
         int N = Utilities.input.nextInt();
