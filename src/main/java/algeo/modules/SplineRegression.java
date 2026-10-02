@@ -118,4 +118,7 @@ public class SplineRegression {
 
     
     }
+    public static void main(String[] args) {
+    new SplineRegression().calculate();
+    }
 }

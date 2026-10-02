@@ -73,13 +73,14 @@ public class ImageRestoration {
 
             int batasIterasi = 1000;
             int jumlahIterasi = 0;
-            double galatMaks = 0.1;
+            double galatMaks = 0.0001;
             double galatTerbesar = 100.0;
             while (jumlahIterasi < batasIterasi && galatTerbesar > galatMaks){
                 for (int i = 0; i < N; i++){
                     int x = (int) pixelRusak.value[i][0];
                     int y = (int) pixelRusak.value[i][1];
                     for (int z = 0; z < 3; z++){
+                        galatTerbesar = 0.0;
                         double atas = matriksGambar[y - 1][x][z];
                         double bawah = matriksGambar[y + 1][x][z];
                         double kiri = matriksGambar[y][x - 1][z];
@@ -114,9 +115,16 @@ public class ImageRestoration {
             File fileHasil = new File(pathHasil);
             ImageIO.write((gambarHasil), "png", fileHasil);
             System.out.println("Restorasi berhasil! Gambar hasil disimpan di: " + fileHasil.getAbsolutePath());
+            System.out.println("Jumlah iterasi yang dilakukan pada restorasi sebanyak " + jumlahIterasi + " iterasi.");
+            System.out.println("Nilai galat terbesar akhir adalah " + galatTerbesar);
+            System.out.println("Dimensi SPL yang diselesaikan adalah " + N + "x" + N);
 
         } catch (IOException e){
             System.out.println("Terjadi kesalahan saat memperbaiki gambar: " +e.getMessage());
         }
     }
+    public static void main(String[] args) {
+    new ImageRestoration().restoreImage();
+    }
+
 }

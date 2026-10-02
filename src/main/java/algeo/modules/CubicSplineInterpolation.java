@@ -127,6 +127,6 @@ public class CubicSplineInterpolation {
 
     }
     public static void main(String[] args) {
-    new CubicSplineInterpolation().interpolate();
+    new CubicSplineInterpolation().cubicSplineInterpolate();
     }
 }
