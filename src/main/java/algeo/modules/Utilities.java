@@ -194,7 +194,12 @@ public class Utilities {
         if(y == 0)return 1;
         if(y == 1)return x;
         return power(x * x, y / 2) * power(x, y % 2);
-    } 
+    }
+    public static double power(double x, int y){
+        if(y == 0)return 1;
+        if(y == 1)return x;
+        return power(x * x, y / 2) * power(x, y % 2);
+    }
   
     public static Matrix Cofactor(Matrix A){
         Matrix B = new Matrix(A.row, A.col);
@@ -233,9 +238,13 @@ public class Utilities {
         int p = 0;
         double det = 1.00;
         for(int i = 0; i < B.row; i++){
-            if(B.value[i][i] == 0.00){
-                OBE.swapRow(B, i, OBE.findPivotRow(B, i, i));
+            int pivotRow = OBE.findPivotRow(B, i, i);
+            if(i != pivotRow){
+                OBE.swapRow(B, i, pivotRow);
                 p++;
+            }
+            if(B.value[i][i] == 0.00){
+                throw new IllegalArgumentException("Determinan bernilai 0 karena nilai di diagonal matriks bernilai 0");
             }
             det *= B.value[i][i];
             for(int j=i+1; j<B.row; j++){
