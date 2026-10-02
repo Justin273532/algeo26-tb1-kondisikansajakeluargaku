@@ -1,7 +1,7 @@
 package algeo.modules;
 
 public class SplineRegression {
-    public void calculate() {
+    public static void calculate() {
 
         System.out.println("Masukkan Jumlah Data:");
         int N = Utilities.input.nextInt(); // Baca Input
