@@ -97,24 +97,28 @@ public class SplineRegression {
                     System.out.printf("%.3fx^" + i, hasil.value[i][4 + K]);
                 }
             } else{
-                System.out.printf("%.3f(x - %.3f)^3", hasil.value[i][4 + K], array_Xi[i]);
+                System.out.printf("%.3f(x - %.3f)^3", hasil.value[i][4 + K], array_Xi[i - 4]);
             }
         }
 
         System.out.print("Masukkan x untuk prediksi nilai: ");
+        double prediksi = 0;
         double xt = Utilities.input.nextDouble();
         if (xt >= x[0] && xt <= x[N - 1]){
-            double prediksi = 0;
-            for (int i = 0; i < 4 + K; i++){
+
+            for (int i = 0; i < K + 4; i++){
                 if (i <= 3){
                     prediksi = prediksi + hasil.value[i][4 + K] * Math.pow(xt, i);
+                } else if (xt > array_Xi[i - 4]){
+                    prediksi = prediksi + hasil.value[i][4 + K] * Math.pow((xt - array_Xi[i - 4]), 3);
                 } else{
-                    prediksi = prediksi + hasil.value[i][4 + K] * Math.pow((xt - array_Xi[i]), 3);
+                    prediksi = prediksi + 0;
                 }
             }
         } else {
             System.out.println("Error: x berada di luar batasan");
         }
+        System.out.println("Hasil prediksi: " + prediksi);
 
     
     }
