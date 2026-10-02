@@ -1,0 +1,1373 @@
+Langkah perhitungan determinan (Ekspansi kofaktor):
+Ekspansi kofaktor pada baris pertama matriks 5x5:
+
+Matriks saat ini:
+2.000 -1.000 3.000 0.000 4.000
+1.000 2.000 -2.000 5.000 -1.000
+3.000 1.000 1.000 2.000 0.000
+0.000 4.000 -1.000 3.000 2.000
+5.000 0.000 4.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+2.000 -2.000 5.000 -1.000
+1.000 1.000 2.000 0.000
+4.000 -1.000 3.000 2.000
+0.000 4.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 2.000 0.000
+-1.000 3.000 2.000
+4.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 8.000, suku = 8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -12.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -14.000, suku = -0.000.
+
+Jumlah suku ekspansi = 32.000.
+
+Elemen a[1,1] = 2.000, tanda +, determinan minor = 32.000, suku = 64.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 2.000 0.000
+4.000 3.000 2.000
+0.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 8.000, suku = 8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 16.000, suku = -32.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 8.000, suku = 0.000.
+
+Jumlah suku ekspansi = -24.000.
+
+Elemen a[1,2] = -2.000, tanda -, determinan minor = -24.000, suku = -48.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 1.000 0.000
+4.000 -1.000 2.000
+0.000 4.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -12.000, suku = -12.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 16.000, suku = -16.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 16.000, suku = 0.000.
+
+Jumlah suku ekspansi = -28.000.
+
+Elemen a[1,3] = 5.000, tanda +, determinan minor = -28.000, suku = -140.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 1.000 2.000
+4.000 -1.000 3.000
+0.000 4.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -14.000, suku = -14.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 8.000, suku = -8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = 16.000, suku = 32.000.
+
+Jumlah suku ekspansi = 10.000.
+
+Elemen a[1,4] = -1.000, tanda -, determinan minor = 10.000, suku = 10.000.
+
+Jumlah suku ekspansi = -114.000.
+
+Elemen a[1,1] = 2.000, tanda +, determinan minor = -114.000, suku = -228.000.
+
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+1.000 -2.000 5.000 -1.000
+3.000 1.000 2.000 0.000
+0.000 -1.000 3.000 2.000
+5.000 4.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 2.000 0.000
+-1.000 3.000 2.000
+4.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 8.000, suku = 8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -12.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -14.000, suku = -0.000.
+
+Jumlah suku ekspansi = 32.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 32.000, suku = 32.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 2.000 0.000
+0.000 3.000 2.000
+5.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 8.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -10.000, suku = 20.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -15.000, suku = -0.000.
+
+Jumlah suku ekspansi = 44.000.
+
+Elemen a[1,2] = -2.000, tanda -, determinan minor = 44.000, suku = 88.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 0.000
+0.000 -1.000 2.000
+5.000 4.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = -12.000, suku = -36.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -10.000, suku = 10.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 5.000, suku = 0.000.
+
+Jumlah suku ekspansi = -26.000.
+
+Elemen a[1,3] = 5.000, tanda +, determinan minor = -26.000, suku = -130.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 2.000
+0.000 -1.000 3.000
+5.000 4.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = -14.000, suku = -42.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -15.000, suku = 15.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = 5.000, suku = 10.000.
+
+Jumlah suku ekspansi = -17.000.
+
+Elemen a[1,4] = -1.000, tanda -, determinan minor = -17.000, suku = -17.000.
+
+Jumlah suku ekspansi = -27.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = -27.000, suku = -27.000.
+
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+1.000 2.000 5.000 -1.000
+3.000 1.000 2.000 0.000
+0.000 4.000 3.000 2.000
+5.000 0.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 2.000 0.000
+4.000 3.000 2.000
+0.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 8.000, suku = 8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 16.000, suku = -32.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 8.000, suku = 0.000.
+
+Jumlah suku ekspansi = -24.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -24.000, suku = -24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 2.000 0.000
+0.000 3.000 2.000
+5.000 2.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+3.000 2.000
+2.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 4.000, suku = 12.000.
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 2.000, suku = -4.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 8.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -10.000, suku = 20.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -15.000, suku = -0.000.
+
+Jumlah suku ekspansi = 44.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 44.000, suku = -88.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 0.000
+0.000 4.000 2.000
+5.000 0.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 16.000, suku = 48.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -10.000, suku = 10.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -20.000, suku = -0.000.
+
+Jumlah suku ekspansi = 58.000.
+
+Elemen a[1,3] = 5.000, tanda +, determinan minor = 58.000, suku = 290.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 2.000
+0.000 4.000 3.000
+5.000 0.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 8.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -15.000, suku = 15.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = -20.000, suku = -40.000.
+
+Jumlah suku ekspansi = -1.000.
+
+Elemen a[1,4] = -1.000, tanda -, determinan minor = -1.000, suku = -1.000.
+
+Jumlah suku ekspansi = 177.000.
+
+Elemen a[1,3] = 3.000, tanda +, determinan minor = 177.000, suku = 531.000.
+
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+1.000 2.000 -2.000 -1.000
+3.000 1.000 1.000 0.000
+0.000 4.000 -1.000 2.000
+5.000 0.000 4.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 1.000 0.000
+4.000 -1.000 2.000
+0.000 4.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -12.000, suku = -12.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 16.000, suku = -16.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 16.000, suku = 0.000.
+
+Jumlah suku ekspansi = -28.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -28.000, suku = -28.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 0.000
+0.000 -1.000 2.000
+5.000 4.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 2.000
+4.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 4.000, suku = -4.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 4.000, suku = -8.000.
+
+Jumlah suku ekspansi = -12.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = -12.000, suku = -36.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -10.000, suku = 10.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = 5.000, suku = 0.000.
+
+Jumlah suku ekspansi = -26.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -26.000, suku = 52.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 0.000
+0.000 4.000 2.000
+5.000 0.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 2.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 16.000, suku = 48.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 2.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = 5.000, suku = -10.000.
+
+Jumlah suku ekspansi = -10.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -10.000, suku = 10.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -20.000, suku = -0.000.
+
+Jumlah suku ekspansi = 58.000.
+
+Elemen a[1,3] = -2.000, tanda +, determinan minor = 58.000, suku = -116.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 1.000
+0.000 4.000 -1.000
+5.000 0.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 16.000, suku = 48.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 5.000, suku = -5.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 1.000, tanda +, determinan minor = -20.000, suku = -20.000.
+
+Jumlah suku ekspansi = 23.000.
+
+Elemen a[1,4] = -1.000, tanda -, determinan minor = 23.000, suku = 23.000.
+
+Jumlah suku ekspansi = -69.000.
+
+Elemen a[1,4] = 0.000, tanda -, determinan minor = -69.000, suku = 0.000.
+
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+1.000 2.000 -2.000 5.000
+3.000 1.000 1.000 2.000
+0.000 4.000 -1.000 3.000
+5.000 0.000 4.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.000 1.000 2.000
+4.000 -1.000 3.000
+0.000 4.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = -14.000, suku = -14.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 8.000, suku = -8.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = 16.000, suku = 32.000.
+
+Jumlah suku ekspansi = 10.000.
+
+Elemen a[1,1] = 1.000, tanda +, determinan minor = 10.000, suku = 10.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 2.000
+0.000 -1.000 3.000
+5.000 4.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-1.000 3.000
+4.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = -1.000, tanda +, determinan minor = 2.000, suku = -2.000.
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 4.000, suku = -12.000.
+
+Jumlah suku ekspansi = -14.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = -14.000, suku = -42.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -15.000, suku = 15.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = 5.000, suku = 10.000.
+
+Jumlah suku ekspansi = -17.000.
+
+Elemen a[1,2] = 2.000, tanda -, determinan minor = -17.000, suku = 34.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 2.000
+0.000 4.000 3.000
+5.000 0.000 2.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 3.000
+0.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 2.000, suku = 8.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 0.000, suku = -0.000.
+
+Jumlah suku ekspansi = 8.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 8.000, suku = 24.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 3.000
+5.000 2.000
+
+Determinan matriks 1x1 = 2.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 2.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 3.000, tanda -, determinan minor = 5.000, suku = -15.000.
+
+Jumlah suku ekspansi = -15.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = -15.000, suku = 15.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 2.000, tanda +, determinan minor = -20.000, suku = -40.000.
+
+Jumlah suku ekspansi = -1.000.
+
+Elemen a[1,3] = -2.000, tanda +, determinan minor = -1.000, suku = 2.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+3.000 1.000 1.000
+0.000 4.000 -1.000
+5.000 0.000 4.000
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+4.000 -1.000
+0.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 4.000, tanda +, determinan minor = 4.000, suku = 16.000.
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 0.000, suku = 0.000.
+
+Jumlah suku ekspansi = 16.000.
+
+Elemen a[1,1] = 3.000, tanda +, determinan minor = 16.000, suku = 48.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 -1.000
+5.000 4.000
+
+Determinan matriks 1x1 = 4.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 4.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = -1.000, tanda -, determinan minor = 5.000, suku = 5.000.
+
+Jumlah suku ekspansi = 5.000.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 5.000, suku = -5.000.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.000 4.000
+5.000 0.000
+
+Determinan matriks 1x1 = 0.000.
+
+Elemen a[1,1] = 0.000, tanda +, determinan minor = 0.000, suku = 0.000.
+
+Determinan matriks 1x1 = 5.000.
+
+Elemen a[1,2] = 4.000, tanda -, determinan minor = 5.000, suku = -20.000.
+
+Jumlah suku ekspansi = -20.000.
+
+Elemen a[1,3] = 1.000, tanda +, determinan minor = -20.000, suku = -20.000.
+
+Jumlah suku ekspansi = 23.000.
+
+Elemen a[1,4] = 5.000, tanda -, determinan minor = 23.000, suku = -115.000.
+
+Jumlah suku ekspansi = -69.000.
+
+Elemen a[1,5] = 4.000, tanda +, determinan minor = -69.000, suku = -276.000.
+
+Jumlah suku ekspansi = 0.000.
+
+Determinan = 0.000

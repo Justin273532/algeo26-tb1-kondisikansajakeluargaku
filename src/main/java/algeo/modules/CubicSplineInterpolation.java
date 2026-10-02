@@ -1,132 +1,61 @@
 package algeo.modules;
 
+import java.util.Arrays;
+
+/** Natural cubic spline interpolation. Each coefficient row stores a,b,c,d for a+b*t+c*t^2+d*t^3, t=x-x_i. */
 public class CubicSplineInterpolation {
-    public static void cubicSplineInterpolate() {
-        // Input N
-        System.out.println("Masukkan N: ");
-        int N = Utilities.input.nextInt();
+    public static final class Spline {
+        public final double[] x;
+        public final Matrix coefficients;
+        private Spline(double[] x, Matrix coefficients) { this.x = x; this.coefficients = coefficients; }
 
-        // Membuat matriks data
-        double[][] input_data = new double[N][2];
-
-        // Input kumpulan data
-        for (int i = 0; i < N; i++){
-            System.out.println("Masukkan nilai x dan y (format input x y): ");
-            input_data[i][0] = Utilities.input.nextDouble();
-            input_data[i][1] = Utilities.input.nextDouble();
-        }
-
-        // Sorting input karena diperlukan data X berurutan
-        for (int i = 0; i < N; i++){
-            int idx_min = i;
-            for (int j = i + 1; j < N; j++){
-                if (input_data[j][0] < input_data[idx_min][0]){
-                    idx_min = j;
-                }
+        public double evaluate(double value) {
+            int interval = 0;
+            if (value >= x[x.length - 1]) interval = x.length - 2;
+            else if (value > x[0]) {
+                int found = Arrays.binarySearch(x, value);
+                interval = found >= 0 ? Math.min(found, x.length - 2) : -found - 2;
             }
-            if (idx_min != i){
-                double temp_x = input_data[i][0];
-                input_data[i][0] = input_data[idx_min][0];
-                input_data[idx_min][0] = temp_x;
-
-                double temp_y = input_data[i][1];
-                input_data[i][1] = input_data[idx_min][1];
-                input_data[idx_min][1] = temp_y;
-            }
+            double t = value - x[interval];
+            return coefficients.value[interval][0] + t * (coefficients.value[interval][1] + t * (coefficients.value[interval][2] + t * coefficients.value[interval][3]));
         }
-
-        double[] interval = new double[N - 1];
-        for(int i = 0; i < N - 1; i++){
-            interval[i] = input_data[i + 1][0] - input_data[i][0];
-        }
-
-        // Membentuk matriks tridiagonal
-        Matrix tridiagonal = new Matrix(N - 2, N - 1);
-        for(int i = 0; i < N - 2; i++){
-            int j = i + 1;
-
-            double h_kiri = interval[j - 1];
-            double h_kanan = interval[j];
-            double dy_kiri = (input_data[j][1] - input_data[j - 1][1]) / h_kiri;
-            double dy_kanan = (input_data[j + 1][1] - input_data[j][1]) / h_kanan;
-            double penyebut = h_kiri + h_kanan;
-            double mu = h_kiri/penyebut;
-            double lambda = 1.0 - mu;
-            double d = (6.0 / penyebut) * (dy_kanan - dy_kiri);
-
-            tridiagonal.value[i][i] = 2.0;
-            if (i > 0){
-                tridiagonal.value[i][i - 1] = mu;
-            }
-
-            if (i < N - 3){
-                tridiagonal.value[i][i + 1] = lambda;
-            }
-
-            tridiagonal.value[i][N - 2] = d;
-        }
-
-        Matrix rref = GaussJordanElim.toReducedRowEchelonFormMatrix(tridiagonal);
-
-        double[] M = new double[N];
-        M[0] = 0.0;
-        M[N - 1] = 0.0;
-        for (int i = 0; i < N - 2; i++){
-            M[i + 1] = rref.value[i][N - 2];
-        }
-
-        Matrix koef = Utilities.createMatrix(N - 1, 4);
-        for (int i = 0; i < N - 1; i++){
-            double h = interval[i];
-            double yi = input_data[i][1];
-            double yi_plus_1 = input_data[i + 1][1];
-            
-            koef.value[i][0] = yi;
-            koef.value[i][1] = ((yi_plus_1 - yi)/h) - (h * (2.0 * M[i] + M[i + 1])/6.0);
-            koef.value[i][2] = M[i] / 2.0;
-            koef.value[i][3] = (M[i + 1] - M[i]) / (6.0 * h);
-
-        }
-
-        System.out.println("Nilai turunan kedua pada setiap knot:");
-        for (int i = 0; i < N; i++){
-            System.out.println("M" + i + ": " + M[i]);
-        }
-
-        System.out.println("Persamaan polinom kubik untuk setiap segmen:");
-        for (int i = 0; i < N - 1; i++){
-            double a = koef.value[i][0];
-            double b = koef.value[i][1];
-            double c = koef.value[i][2];
-            double d = koef.value[i][3];
-            System.out.printf("S_%d(x) = %.3f + %.3f(x - %.3f) + %.3f(x - %.3f)^2 + %.3f(x - %.3f)^3\n", i, a, b, input_data[i][0], c, input_data[i][0], d, input_data[i][0]);
-            System.out.printf("Domain: [%.3f <= x <= %.3f]\n\n", input_data[i][0], input_data[i + 1][0]);
-        }
-
-        System.out.println("Masukkan nilai x untuk interpolasi: ");
-        double x = Utilities.input.nextDouble();
-        if (x >= input_data[0][0] && x <= input_data[N - 1][0]){
-            int segmen = 0;
-            for (int i = 0; i < N - 1; i++){
-                if (x >= input_data[i][0] && x <= input_data[i + 1][0]);
-                segmen = i;
-                break;
-            }
-
-            double xi = input_data[segmen][0];
-            double selisih = x - xi;
-            double a = koef.value[segmen][0];
-            double b = koef.value[segmen][1];
-            double c = koef.value[segmen][2];
-            double d = koef.value[segmen][3];
-            double hasil = a + b*selisih + c*Math.pow(selisih, 2) + d*Math.pow(selisih, 3);
-            System.out.println("Hasil interpolasi: " + hasil);
-        } else {
-            System.out.printf("Input berada di luar domain: [%.3f <= x <= %.3f]", input_data[0][0], input_data[N - 1][0]);
-        }
-
     }
-    public static void main(String[] args) {
-    new CubicSplineInterpolation().cubicSplineInterpolate();
+
+    public static Spline cubicSplineInterpolate(Matrix points) {
+        if (points == null || points.col != 2 || points.row < 2) throw new IllegalArgumentException("Spline membutuhkan sedikitnya dua titik dengan dua kolom (x dan y).");
+        Utilities.requireFiniteMatrix(points);
+        double[][] sorted = new double[points.row][2];
+        for (int i = 0; i < points.row; i++) { sorted[i][0] = points.value[i][0]; sorted[i][1] = points.value[i][1]; }
+        Arrays.sort(sorted, java.util.Comparator.comparingDouble(p -> p[0]));
+        int n = sorted.length;
+        double[] x = new double[n], y = new double[n], h = new double[n - 1];
+        for (int i = 0; i < n; i++) { x[i] = sorted[i][0]; y[i] = sorted[i][1]; }
+        for (int i = 0; i < n - 1; i++) {
+            h[i] = x[i + 1] - x[i];
+            if (h[i] <= Utilities.EPS) throw new IllegalArgumentException("Nilai x harus unik dan meningkat.");
+        }
+        double[] second = new double[n];
+        if (n > 2) {
+            int m = n - 2;
+            Matrix system = new Matrix(m, m + 1);
+            for (int i = 0; i < m; i++) {
+                int k = i + 1;
+                system.value[i][i] = 2 * (h[k - 1] + h[k]);
+                if (i > 0) system.value[i][i - 1] = h[k - 1];
+                if (i + 1 < m) system.value[i][i + 1] = h[k];
+                system.value[i][m] = 6 * ((y[k + 1] - y[k]) / h[k] - (y[k] - y[k - 1]) / h[k - 1]);
+            }
+            GaussElim.Result result = GaussElim.solveByGaussElim(system);
+            if (result.type != GaussElim.SolutionType.UNIQUE_SOLUTION) throw new IllegalArgumentException("Sistem spline tidak memiliki solusi unik.");
+            for (int i = 0; i < m; i++) second[i + 1] = result.solution.value[i][0];
+        }
+        Matrix coefficients = new Matrix(n - 1, 4);
+        for (int i = 0; i < n - 1; i++) {
+            coefficients.value[i][0] = y[i];
+            coefficients.value[i][1] = (y[i + 1] - y[i]) / h[i] - h[i] * (2 * second[i] + second[i + 1]) / 6;
+            coefficients.value[i][2] = second[i] / 2;
+            coefficients.value[i][3] = (second[i + 1] - second[i]) / (6 * h[i]);
+        }
+        return new Spline(x, coefficients);
     }
 }

@@ -1,7 +1,6 @@
 package algeo.modules;
 
 public class GaussElim {
-
     public enum SolutionType { UNIQUE_SOLUTION, INFINITE_SOLUTION, NO_SOLUTION }
 
     public static class Result {
@@ -11,134 +10,109 @@ public class GaussElim {
     }
 
     public static String formatNumber(double n) {
-        if (n == (long) n) {
-            return Long.toString((long) n);
-        }
-
-        return Double.toString(n);
+        return Utilities.formatDouble(n);
     }
 
-    public static int[] findPivotColumnAfterREF(Matrix REF) {
-        int variableCount = REF.col-1;
-        int[] pivotColOfRow = new int[REF.row];
-        for(int i=0; i<REF.row; i++) {
-            int pivotCol = -1;
-            for(int j=0; j<variableCount; j++) {
-                if(REF.value[i][j] != 0) {
-                    pivotCol = j;
-                    break;
-                }
-            }
-            pivotColOfRow[i] = pivotCol;
+    public static int[] findPivotColumnAfterREF(Matrix ref) {
+        validateAugmented(ref);
+        int variables = ref.col - 1;
+        int[] pivots = new int[ref.row];
+        java.util.Arrays.fill(pivots, -1);
+        for (int i = 0; i < ref.row; i++) for (int j = 0; j < variables; j++) {
+            if (!Utilities.isZero(ref.value[i][j])) { pivots[i] = j; break; }
         }
-        return pivotColOfRow;
+        return pivots;
     }
 
-    public static boolean isPivotColumn(int[] pivotColOfRow, int col) {
-        for(int pivotCol : pivotColOfRow) {
-            if(pivotCol == col) {
-                return true;
-            }
-        }
+    public static boolean isPivotColumn(int[] pivots, int col) {
+        for (int pivot : pivots) if (pivot == col) return true;
         return false;
     }
 
-    public static Matrix toRowEchelonFormMatrix(Matrix A) {
-        Matrix B = Utilities.copyMatrix(A);
-        int colidx = 0;
-        for (int i=0; i<B.row && colidx<B.col-1; i++) {
-            int pivotrow = OBE.findPivotRow(B, i, colidx);
-            if (B.value[pivotrow][colidx] == 0) {
-                colidx++;
-                i--;
-                continue;
+    public static Matrix toRowEchelonFormMatrix(Matrix augmented) {
+        validateAugmented(augmented);
+        Matrix work = Utilities.copyMatrix(augmented);
+        int pivotRow = 0;
+        for (int col = 0; col < work.col - 1 && pivotRow < work.row; col++) {
+            int best = OBE.findPivotRow(work, pivotRow, col);
+            if (Utilities.isZero(work.value[best][col])) continue;
+            OBE.swapRow(work, pivotRow, best);
+            for (int r = pivotRow + 1; r < work.row; r++) {
+                double factor = work.value[r][col] / work.value[pivotRow][col];
+                work.value[r][col] = 0.0;
+                for (int j = col + 1; j < work.col; j++) work.value[r][j] -= factor * work.value[pivotRow][j];
             }
-            if (pivotrow != i) {
-                OBE.swapRow(B, i, pivotrow);
-            }
-            for (int j=i+1; j<B.row;j++) {
-                double multiplier = -(B.value[j][colidx] / B.value[i][colidx]);
-                OBE.addMultipleRow(B, multiplier, j, i);
-            }
-            colidx++;
+            pivotRow++;
         }
-        return B;
+        cleanSmallValues(work);
+        return work;
     }
 
-    public static Matrix backSubstitution(Matrix REF, int[] pivotColOfRow) {
-        int variableCount = REF.col-1;
-        Matrix x = Utilities.createMatrix(variableCount, 1);
-        for(int i=REF.row-1; i>=0; i--) {
-            int pivotCol = pivotColOfRow[i];
-            if(pivotCol == -1) {
-                continue;
-            }
-            double total = REF.value[i][variableCount];
-            for(int j=pivotCol+1; j<variableCount; j++) {
-                total -= REF.value[i][j] * x.value[j][0];
-            }
-            x.value[pivotCol][0] = total / REF.value[i][pivotCol];
+    public static Matrix backSubstitution(Matrix ref, int[] pivotColOfRow) {
+        validateAugmented(ref);
+        int variables = ref.col - 1;
+        Matrix x = new Matrix(variables, 1);
+        for (int i = ref.row - 1; i >= 0; i--) {
+            int pivot = pivotColOfRow[i];
+            if (pivot < 0) continue;
+            double rhs = ref.value[i][variables];
+            for (int j = pivot + 1; j < variables; j++) rhs -= ref.value[i][j] * x.value[j][0];
+            x.value[pivot][0] = rhs / ref.value[i][pivot];
         }
         return x;
     }
 
-    public static String[] createParametricSolution(Matrix REF, int[] pivotColOfRow) {
-        int variableCount = REF.col-1;
-        String[] expression = new String[variableCount];
-        for (int col=0; col<variableCount; col++) {
-            if (!isPivotColumn(pivotColOfRow, col)) {
-                expression[col] = "x" + (col+1);
+    public static String[] createParametricSolution(Matrix ref, int[] pivots) {
+        int variables = ref.col - 1;
+        String[] expression = new String[variables];
+        for (int col = 0; col < variables; col++) if (!isPivotColumn(pivots, col)) expression[col] = "x" + (col + 1);
+        for (int i = ref.row - 1; i >= 0; i--) {
+            int pivot = pivots[i];
+            if (pivot < 0) continue;
+            String expr = formatNumber(ref.value[i][variables]);
+            for (int j = pivot + 1; j < variables; j++) {
+                double coefficient = ref.value[i][j];
+                if (!Utilities.isZero(coefficient)) expr += " - (" + formatNumber(coefficient) + " * " + expression[j] + ")";
             }
+            double divisor = ref.value[i][pivot];
+            if (!Utilities.isZero(divisor - 1.0)) expr = "(" + expr + ") / " + formatNumber(divisor);
+            expression[pivot] = expr;
         }
-        for (int i=REF.row-1; i>=0; i--) {
-                int pivotCol = pivotColOfRow[i];
-                if (pivotCol == -1) {
-                    continue;
-                }
-                String expr = formatNumber(REF.value[i][variableCount]);
-                for (int j=pivotCol+1; j<variableCount; j++) {
-                    double coefficient = REF.value[i][j];
-                    if (coefficient != 0) {
-                        expr += " - (" + formatNumber(coefficient) + " * " + expression[j] + ")";
-                    }
-                }
-                double pivot = REF.value[i][pivotCol];
-                if (pivot != 1) {
-                    expr = "(" + expr + ") / " + formatNumber(pivot);
-                }
-                expression[pivotCol] = expr;
-            }
-            return expression;
+        return expression;
     }
 
-    public static Result solveByGaussElim(Matrix Augmented) {
-        Matrix REF = toRowEchelonFormMatrix(Augmented);
-        int variableCount = Augmented.col-1;
-        int[] pivotColOfRow = findPivotColumnAfterREF(REF);
-        int pivotCount = 0;
-        for(int i=0; i<REF.row; i++) {
-            if(pivotColOfRow[i] == -1) {
-                if(REF.value[i][variableCount] != 0) {
-                    Result resultType = new Result();
-                    resultType.type = SolutionType.NO_SOLUTION;
-                    return resultType;
-                }
-            }
-            else {
-                pivotCount++;
-            }
-        }
-        if(pivotCount < variableCount) {
-            Result resultType = new Result();
-            resultType.type = SolutionType.INFINITE_SOLUTION;
-            resultType.expression = createParametricSolution(REF, pivotColOfRow);
-            return resultType;
-        }
+    public static Result solveByGaussElim(Matrix augmented) {
+        return classify(toRowEchelonFormMatrix(augmented));
+    }
 
+    static Result classify(Matrix echelon) {
+        int variables = echelon.col - 1;
+        int[] pivots = findPivotColumnAfterREF(echelon);
+        int pivotCount = 0;
+        for (int i = 0; i < echelon.row; i++) {
+            if (pivots[i] < 0) {
+                if (!Utilities.isZero(echelon.value[i][variables])) {
+                    Result result = new Result(); result.type = SolutionType.NO_SOLUTION; return result;
+                }
+            } else pivotCount++;
+        }
         Result result = new Result();
-        result.type = SolutionType.UNIQUE_SOLUTION;
-        result.solution = backSubstitution(REF, pivotColOfRow);
+        if (pivotCount < variables) {
+            result.type = SolutionType.INFINITE_SOLUTION;
+            result.expression = createParametricSolution(echelon, pivots);
+        } else {
+            result.type = SolutionType.UNIQUE_SOLUTION;
+            result.solution = backSubstitution(echelon, pivots);
+        }
         return result;
     }
-}
 
+    static void validateAugmented(Matrix a) {
+        if (a == null || a.row == 0 || a.col < 2) throw new IllegalArgumentException("Matriks augmented harus memiliki baris dan minimal satu variabel serta satu kolom konstanta.");
+        Utilities.requireFiniteMatrix(a);
+    }
+
+    static void cleanSmallValues(Matrix a) {
+        for (int i = 0; i < a.row; i++) for (int j = 0; j < a.col; j++) if (Utilities.isZero(a.value[i][j])) a.value[i][j] = 0.0;
+    }
+}
