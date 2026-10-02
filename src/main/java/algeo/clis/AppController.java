@@ -54,10 +54,19 @@ public class AppController {
             Options.menu_SPL();
             int choice = readChoice();
             switch (choice) {
-                case 1 -> present(formatSolution(GaussElim.solveByGaussElim(readMatrix("matriks augmented SPL"))));
-                case 2 -> present(formatSolution(GaussJordanElim.solveByGaussJordan(readMatrix("matriks augmented SPL"))));
-                case 3 -> { Matrix[] system = readSquareSystem(); present(MatrixIO.formatMatrix(InverseMethod.inverseMethod(system[0], system[1]))); }
-                case 4 -> runSPL_crammer();
+                case 1 -> runSubmenuOperation(() -> {
+                    SPLInput system = readSPLInput();
+                    present(formatSolution(GaussElim.solveByGaussElim(system.augmented())));
+                });
+                case 2 -> runSubmenuOperation(() -> {
+                    SPLInput system = readSPLInput();
+                    present(formatSolution(GaussJordanElim.solveByGaussJordan(system.augmented())));
+                });
+                case 3 -> runSubmenuOperation(() -> {
+                    SPLInput system = readSPLInput();
+                    present(MatrixIO.formatMatrix(InverseMethod.inverseMethod(system.a(), system.b())));
+                });
+                case 4 -> runSubmenuOperation(this::runSPL_crammer);
                 case 5 -> back = true;
                 default -> System.out.println("Pilihan tidak valid.");
             }
@@ -70,8 +79,8 @@ public class AppController {
             Options.menu_Determinan();
             int choice = readChoice();
             switch (choice) {
-                case 1 -> runDeterminant(true);
-                case 2 -> runDeterminant(false);
+                case 1 -> runSubmenuOperation(() -> runDeterminant(true));
+                case 2 -> runSubmenuOperation(() -> runDeterminant(false));
                 case 3 -> back = true;
                 default -> System.out.println("Pilihan tidak valid.");
             }
@@ -84,8 +93,8 @@ public class AppController {
             Options.menu_MatriksInvers();
             int choice = readChoice();
             switch (choice) {
-                case 1 -> runInverse(true);
-                case 2 -> runInverse(false);
+                case 1 -> runSubmenuOperation(() -> runInverse(true));
+                case 2 -> runSubmenuOperation(() -> runInverse(false));
                 case 3 -> back = true;
                 default -> System.out.println("Pilihan tidak valid.");
             }
@@ -123,8 +132,8 @@ public class AppController {
     }
 
     public void runSPL_crammer() throws IOException {
-        Matrix[] system = readSquareSystem();
-        present(MatrixIO.formatMatrix(CramerRule.cramerRule(system[0], system[1])));
+        SPLInput system = readSPLInput();
+        present(MatrixIO.formatMatrix(CramerRule.cramerRule(system.a(), system.b())));
     }
 
     private void runPolynomialInterpolation() throws IOException {
@@ -188,24 +197,24 @@ public class AppController {
         System.out.println("Restorasi disimpan ke " + Path.of(output.trim()).toAbsolutePath());
     }
 
-    private Matrix[] readSquareSystem() throws IOException {
-        System.out.println("Sumber sistem: 1. Keyboard (A lalu b)  2. File teks (file A lalu file b)");
-        int source = readChoice();
-        if (source == 1) {
-            System.out.print("Jumlah variabel n: ");
-            int n = inputHandler.inputInt();
-            if (inputHandler.inputError_Int || n <= 0) { inputHandler.inputError_Int = false; throw new IllegalArgumentException("Jumlah variabel harus positif."); }
-            System.out.println("Masukkan matriks koefisien A, ukuran " + n + " x " + n + ":");
-            Matrix a = inputHandler.inputMatrix(n, n);
-            if (a == null) throw new IllegalArgumentException("Input matriks A tidak valid.");
-            System.out.println("Masukkan vektor konstanta b, ukuran " + n + " x 1:");
-            Matrix b = inputHandler.inputMatrix(n, 1);
-            if (b == null) throw new IllegalArgumentException("Input vektor b tidak valid.");
-            return new Matrix[] { a, b };
+    private SPLInput readSPLInput() throws IOException {
+        System.out.println("Format input SPL: 1. Matriks A dan vektor b terpisah  2. Matriks augmented [A|b]");
+        int format = readChoice();
+        if (format == 1) {
+            Matrix a = readMatrix("matriks koefisien A");
+            Matrix b = readMatrix("vektor konstanta b (satu kolom)");
+            Matrix augmented = PolinomialInterpolation.createAugmentedMatrix(a, b);
+            return new SPLInput(a, b, augmented);
         }
-        if (source == 2) return new Matrix[] { readMatrixFile("Path file matriks A: "), readMatrixFile("Path file vektor b: ") };
-        throw new IllegalArgumentException("Sumber input tidak valid.");
+        if (format == 2) {
+            Matrix augmented = readMatrix("matriks augmented [A|b] (kolom terakhir adalah b)");
+            Matrix[] parts = InverseMethod.splitAugmentMatrix(augmented);
+            return new SPLInput(parts[0], parts[1], augmented);
+        }
+        throw new IllegalArgumentException("Format input SPL tidak valid.");
     }
+
+    private record SPLInput(Matrix a, Matrix b, Matrix augmented) {}
 
     private Matrix readMatrix(String purpose) throws IOException {
         System.out.println("Input " + purpose + ": 1. Keyboard  2. File .txt");
@@ -215,14 +224,31 @@ public class AppController {
             if (matrix == null) throw new IllegalArgumentException("Input matriks tidak valid.");
             return matrix;
         }
-        if (source == 2) return readMatrixFile("Path file .txt: ");
+        if (source == 2) return readMatrixFile(purpose);
         throw new IllegalArgumentException("Sumber input tidak valid.");
     }
 
-    private Matrix readMatrixFile(String prompt) throws IOException {
+    private Matrix readMatrixFile(String purpose) throws IOException {
+        String prompt = "Path file .txt untuk " + purpose
+            + " (relatif dari folder proyek, contoh: test/input.txt; absolut: C:/Users/Nama/Desktop/input.txt). Path dibaca satu baris; spasi diperbolehkan.\n"
+            + "Isi file: satu baris per baris matriks, elemen dipisahkan spasi. Contoh matriks:\n"
+            + "1 2\n3 4\nContoh vektor:\n1\n2\nPath file: ";
         String file = inputHandler.inputLine(prompt);
         if (file == null || file.trim().isEmpty()) throw new IllegalArgumentException("Path file tidak boleh kosong.");
         return MatrixIO.readMatrix(Path.of(file.trim()));
+    }
+
+    private void runSubmenuOperation(MenuOperation operation) {
+        try {
+            operation.run();
+        } catch (IOException | IllegalArgumentException e) {
+            if (!inputHandler.inputEnded) System.out.println("Operasi gagal: " + e.getMessage());
+        }
+    }
+
+    @FunctionalInterface
+    private interface MenuOperation {
+        void run() throws IOException;
     }
 
     private int readChoice() {

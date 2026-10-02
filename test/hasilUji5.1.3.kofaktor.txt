@@ -1,0 +1,272 @@
+Langkah perhitungan determinan (Ekspansi kofaktor):
+Ekspansi kofaktor pada baris pertama matriks 4x4:
+
+Matriks saat ini:
+0.500 1.000 0.000 0.500
+0.500 1.250 0.250 0.500
+-0.100 -0.400 0.200 -0.300
+0.600 1.250 0.450 0.600
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+1.250 0.250 0.500
+-0.400 0.200 -0.300
+1.250 0.450 0.600
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.200 -0.300
+0.450 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = 0.200, tanda +, determinan minor = 0.600, suku = 0.120.
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 0.450, suku = 0.135.
+
+Jumlah suku ekspansi = 0.255.
+
+Elemen a[1,1] = 1.250, tanda +, determinan minor = 0.255, suku = 0.319.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.400 -0.300
+1.250 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = -0.400, tanda +, determinan minor = 0.600, suku = -0.240.
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 1.250, suku = 0.375.
+
+Jumlah suku ekspansi = 0.135.
+
+Elemen a[1,2] = 0.250, tanda -, determinan minor = 0.135, suku = -0.034.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.400 0.200
+1.250 0.450
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,1] = -0.400, tanda +, determinan minor = 0.450, suku = -0.180.
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,2] = 0.200, tanda -, determinan minor = 1.250, suku = -0.250.
+
+Jumlah suku ekspansi = -0.430.
+
+Elemen a[1,3] = 0.500, tanda +, determinan minor = -0.430, suku = -0.215.
+
+Jumlah suku ekspansi = 0.070.
+
+Elemen a[1,1] = 0.500, tanda +, determinan minor = 0.070, suku = 0.035.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+0.500 0.250 0.500
+-0.100 0.200 -0.300
+0.600 0.450 0.600
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+0.200 -0.300
+0.450 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = 0.200, tanda +, determinan minor = 0.600, suku = 0.120.
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 0.450, suku = 0.135.
+
+Jumlah suku ekspansi = 0.255.
+
+Elemen a[1,1] = 0.500, tanda +, determinan minor = 0.255, suku = 0.128.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 -0.300
+0.600 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 0.600, suku = -0.060.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 0.600, suku = 0.180.
+
+Jumlah suku ekspansi = 0.120.
+
+Elemen a[1,2] = 0.250, tanda -, determinan minor = 0.120, suku = -0.030.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 0.200
+0.600 0.450
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 0.450, suku = -0.045.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = 0.200, tanda -, determinan minor = 0.600, suku = -0.120.
+
+Jumlah suku ekspansi = -0.165.
+
+Elemen a[1,3] = 0.500, tanda +, determinan minor = -0.165, suku = -0.083.
+
+Jumlah suku ekspansi = 0.015.
+
+Elemen a[1,2] = 1.000, tanda -, determinan minor = 0.015, suku = -0.015.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+0.500 1.250 0.500
+-0.100 -0.400 -0.300
+0.600 1.250 0.600
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.400 -0.300
+1.250 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = -0.400, tanda +, determinan minor = 0.600, suku = -0.240.
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 1.250, suku = 0.375.
+
+Jumlah suku ekspansi = 0.135.
+
+Elemen a[1,1] = 0.500, tanda +, determinan minor = 0.135, suku = 0.068.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 -0.300
+0.600 0.600
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 0.600, suku = -0.060.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = -0.300, tanda -, determinan minor = 0.600, suku = 0.180.
+
+Jumlah suku ekspansi = 0.120.
+
+Elemen a[1,2] = 1.250, tanda -, determinan minor = 0.120, suku = -0.150.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 -0.400
+0.600 1.250
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 1.250, suku = -0.125.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = -0.400, tanda -, determinan minor = 0.600, suku = 0.240.
+
+Jumlah suku ekspansi = 0.115.
+
+Elemen a[1,3] = 0.500, tanda +, determinan minor = 0.115, suku = 0.057.
+
+Jumlah suku ekspansi = -0.025.
+
+Elemen a[1,3] = 0.000, tanda +, determinan minor = -0.025, suku = -0.000.
+
+Ekspansi kofaktor pada baris pertama matriks 3x3:
+
+Matriks saat ini:
+0.500 1.250 0.250
+-0.100 -0.400 0.200
+0.600 1.250 0.450
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.400 0.200
+1.250 0.450
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,1] = -0.400, tanda +, determinan minor = 0.450, suku = -0.180.
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,2] = 0.200, tanda -, determinan minor = 1.250, suku = -0.250.
+
+Jumlah suku ekspansi = -0.430.
+
+Elemen a[1,1] = 0.500, tanda +, determinan minor = -0.430, suku = -0.215.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 0.200
+0.600 0.450
+
+Determinan matriks 1x1 = 0.450.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 0.450, suku = -0.045.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = 0.200, tanda -, determinan minor = 0.600, suku = -0.120.
+
+Jumlah suku ekspansi = -0.165.
+
+Elemen a[1,2] = 1.250, tanda -, determinan minor = -0.165, suku = 0.206.
+
+Ekspansi kofaktor pada baris pertama matriks 2x2:
+
+Matriks saat ini:
+-0.100 -0.400
+0.600 1.250
+
+Determinan matriks 1x1 = 1.250.
+
+Elemen a[1,1] = -0.100, tanda +, determinan minor = 1.250, suku = -0.125.
+
+Determinan matriks 1x1 = 0.600.
+
+Elemen a[1,2] = -0.400, tanda -, determinan minor = 0.600, suku = 0.240.
+
+Jumlah suku ekspansi = 0.115.
+
+Elemen a[1,3] = 0.250, tanda +, determinan minor = 0.115, suku = 0.029.
+
+Jumlah suku ekspansi = 0.020.
+
+Elemen a[1,4] = 0.500, tanda -, determinan minor = 0.020, suku = -0.010.
+
+Jumlah suku ekspansi = 0.010.
+
+Determinan = 0.010

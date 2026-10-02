@@ -1,0 +1,78 @@
+Langkah perhitungan determinan (Eliminasi OBE):
+Eliminasi OBE: operasi penjumlahan kelipatan baris tidak mengubah determinan; setiap pertukaran baris membalik tanda.
+
+Matriks awal:
+0.000 2.000 -1.000 3.000
+4.000 1.000 2.000 -2.000
+-2.000 3.000 0.000 1.000
+1.000 -1.000 5.000 2.000
+
+Tukar baris 1 dengan baris 2; tanda determinan berubah.
+
+Matriks setelah pertukaran:
+4.000 1.000 2.000 -2.000
+0.000 2.000 -1.000 3.000
+-2.000 3.000 0.000 1.000
+1.000 -1.000 5.000 2.000
+
+Pivot diagonal a[1,1] = 4.000.
+
+R3 <- R3 - (-0.500)R1.
+
+R4 <- R4 - (0.250)R1.
+
+Matriks setelah eliminasi kolom 1:
+4.000 1.000 2.000 -2.000
+0.000 2.000 -1.000 3.000
+0.000 3.500 1.000 0.000
+0.000 -1.250 4.500 2.500
+
+Tukar baris 2 dengan baris 3; tanda determinan berubah.
+
+Matriks setelah pertukaran:
+4.000 1.000 2.000 -2.000
+0.000 3.500 1.000 0.000
+0.000 2.000 -1.000 3.000
+0.000 -1.250 4.500 2.500
+
+Pivot diagonal a[2,2] = 3.500.
+
+R3 <- R3 - (0.571)R2.
+
+R4 <- R4 - (-0.357)R2.
+
+Matriks setelah eliminasi kolom 2:
+4.000 1.000 2.000 -2.000
+0.000 3.500 1.000 0.000
+0.000 0.000 -1.571 3.000
+0.000 0.000 4.857 2.500
+
+Tukar baris 3 dengan baris 4; tanda determinan berubah.
+
+Matriks setelah pertukaran:
+4.000 1.000 2.000 -2.000
+0.000 3.500 1.000 0.000
+0.000 0.000 4.857 2.500
+0.000 0.000 -1.571 3.000
+
+Pivot diagonal a[3,3] = 4.857.
+
+R4 <- R4 - (-0.324)R3.
+
+Matriks setelah eliminasi kolom 3:
+4.000 1.000 2.000 -2.000
+0.000 3.500 1.000 0.000
+0.000 0.000 4.857 2.500
+0.000 0.000 0.000 3.809
+
+Pivot diagonal a[4,4] = 3.809.
+
+Matriks setelah eliminasi kolom 4:
+4.000 1.000 2.000 -2.000
+0.000 3.500 1.000 0.000
+0.000 0.000 4.857 2.500
+0.000 0.000 0.000 3.809
+
+Hasil akhir: det(A) = - hasil kali elemen diagonal = -259.000.
+
+Determinan = -259.000
