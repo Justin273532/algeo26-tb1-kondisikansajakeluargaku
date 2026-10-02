@@ -1,69 +1,39 @@
-# Aljabar Linier dan Geometri Tubes 1 Template
+# IF2123 Aljabar Linier dan Geometri â€” Kalkulator Matriks
 
-Template awal Tugas Besar 1 IF2123 Aljabar Linier dan Geometri Semester I 2026/2027. Proyek menggunakan Java, Maven, dan JavaFX.
-
-Ruang lingkup tugas meliputi sistem persamaan linier, determinan, matriks balikan, interpolasi polinomial, interpolasi splina kubik natural, dan regresi splina kubik. Ketentuan lengkap mengikuti dokumen spesifikasi tugas besar.
+A Java 17 command-line calculator for linear systems, determinants, matrix inverses, polynomial interpolation, natural cubic splines, and cubic spline regression. It also includes a masked-image restoration utility.
 
 ## Requirements
 
-- Java 17 atau lebih baru
-- Maven 3.6.3 atau lebih baru
+- JDK 17 or newer
+- Apache Maven 3.6.3 or newer
 
-Periksa instalasi dengan perintah berikut.
+## Build and run
 
 ```bash
-java --version
-mvn --version
+mvn test
+mvn package
+java -jar target/matrix-calculator-1.0-SNAPSHOT.jar
 ```
 
-## Struktur direktori
+`mvn package` runs the test suite and creates an executable JAR with `algeo.App` as its entry point.
+
+## CLI and input format
+
+The CLI accepts matrices from the keyboard or from UTF-8 `.txt` files. A matrix file contains one row per line and whitespace-separated values, for example:
 
 ```text
-.
-├── bin
-├── docs
-├── src
-│   └── main
-│       └── java
-│           └── algeo
-├── test
-├── pom.xml
-└── README.md
+1 2 3
+4.5 -6 7
 ```
 
-Kode program diletakkan di dalam `src/main/java/algeo`. Kelas utama program adalah `algeo.App`.
+Blank lines and lines beginning with `#` are ignored. Decimal points and decimal commas are accepted (`4.5` or `4,5`). Every row must contain the same number of values. For a linear system entered from files, provide separate files for the square coefficient matrix `A` and the column vector `b`. Results can be saved as UTF-8 text files from the CLI. Displayed and saved calculated values are rounded to three decimal places; internal calculations retain full double precision.
 
-- `bin`: berkas hasil kompilasi atau JAR final
-- `docs`: laporan tugas besar
-- `src`: kode sumber program
-- `test`: berkas kasus uji
+For interpolation and spline operations, provide a matrix with two columns (`x y`), one point per row. Spline regression asks for the knot values after reading the data.
 
-## Menjalankan program
+## Project layout
 
-Kompilasi proyek:
+- `src/main/java/algeo/clis`: menus, controller, keyboard handling, and text file I/O
+- `src/main/java/algeo/modules`: matrix operations and mathematical algorithms
+- `src/test/java`: JUnit regression tests
 
-```bash
-mvn clean compile
-```
-
-Jalankan program CLI:
-
-```bash
-mvn exec:java
-```
-
-Buat berkas JAR:
-
-```bash
-mvn clean package
-```
-
-Berkas JAR akan tersedia di dalam direktori `target`.
-
-Untuk menggunakan JavaFX, sesuaikan kelas `App.java`, kemudian jalankan:
-
-```bash
-mvn clean javafx:run
-```
-
-Lengkapi kembali README kelompok dengan deskripsi program, alur penggunaan, dan cara menjalankan program sebelum pengumpulan.
+The assignment specification was not included in this repository snapshot; the implementation follows the scope and constraints described in the project README and CLI.

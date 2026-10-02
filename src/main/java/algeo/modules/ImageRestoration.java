@@ -1,122 +1,69 @@
 package algeo.modules;
-import javax.imageio.ImageIO;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/** Harmonic inpainting for pixels selected by a grayscale mask (white means damaged). */
 public class ImageRestoration {
-    public static void restoreImage() {
-        try{
-            // Terima input gambar
-            System.out.print("Masukkan path gambar asli: ");
-            String pathGambar = Utilities.input.next();
-        
-            // Terima input mask
-            System.out.print("Masukkan path gambar mask: ");
-            String pathMask = Utilities.input.next();
+    public static void restoreImage(String imagePath, String maskPath, String outputPath) throws IOException {
+        BufferedImage source = ImageIO.read(new File(imagePath));
+        BufferedImage mask = ImageIO.read(new File(maskPath));
+        if (source == null || mask == null) throw new IOException("Format gambar asli atau mask tidak didukung.");
+        int width = source.getWidth(), height = source.getHeight();
+        if (width > 512 || height > 512 || width <= 0 || height <= 0) throw new IllegalArgumentException("Gambar harus berukuran 1 sampai 512 pixel pada setiap sisi.");
+        if (mask.getWidth() != width || mask.getHeight() != height) throw new IllegalArgumentException("Ukuran gambar mask harus sama dengan gambar asli.");
 
-            System.out.print("Masukkan path output hasil restorasi: ");
-            String pathHasil = Utilities.input.next();
-
-            BufferedImage gambarAsli = ImageIO.read(new File(pathGambar));
-            BufferedImage gambarMask = ImageIO.read(new File(pathMask));
-
-            int lebar = gambarAsli.getWidth();
-            int tinggi = gambarAsli.getHeight();
-
-            if (lebar > 512 || tinggi > 512){
-                System.out.println("Error: Gambar wajib berukuran maksimal 512x512 pixel. Tolong masukkan gambar yang valid.");
-                return;
-            }
-
-            double[][][] matriksGambar = new double[tinggi][lebar][3];
-            Matrix matriksMask = Utilities.createMatrix(lebar, tinggi);
-            int N = 0;
-
-            // Hitung jumlah pixel rusak dan tetapkan nilai pada matriks sebagai penanda
-            for (int i = 0; i < tinggi; i++){
-                for (int j = 0; j < lebar; j++){
-                    int warna = gambarMask.getRGB(j, i) & 0xFF;
-                    if (warna > 128){
-                        matriksMask.value[i][j] = 1.0;
-                        matriksGambar[i][j][0] = 0.0;
-                        matriksGambar[i][j][1] = 0.0;
-                        matriksGambar[i][j][2] = 0.0;
-                        N++;
-
-                    } else {
-                        matriksMask.value[i][j] = 0.0;
-                        int rgb = gambarAsli.getRGB(j, i);
-                        double red = (rgb >> 16) & 0xFF;
-                        double green = (rgb >> 8) & 0xFF;
-                        double blue = rgb & 0xFF;
-                        matriksGambar[i][j][0] = red;
-                        matriksGambar[i][j][1] = green;
-                        matriksGambar[i][j][2] = blue;
-                    }
-                }
-            }
-
-            // Membuat matriks baru berisi koordinat pixel rusak
-            Matrix pixelRusak = Utilities.createMatrix(N, 2);
-            int idx = 0;
-            for (int i = 0; i < tinggi; i++){
-                for (int j = 0; j < lebar; j++){
-                    if (matriksMask.value[i][j] == 1.0){
-                        pixelRusak.value[idx][0] = j;
-                        pixelRusak.value[idx][1] = i;
-                        idx++;
-                    } 
-                }
-            }
-
-            int batasIterasi = 1000;
-            int jumlahIterasi = 0;
-            double galatMaks = 0.1;
-            double galatTerbesar = 100.0;
-            while (jumlahIterasi < batasIterasi && galatTerbesar > galatMaks){
-                for (int i = 0; i < N; i++){
-                    int x = (int) pixelRusak.value[i][0];
-                    int y = (int) pixelRusak.value[i][1];
-                    for (int z = 0; z < 3; z++){
-                        double atas = matriksGambar[y - 1][x][z];
-                        double bawah = matriksGambar[y + 1][x][z];
-                        double kiri = matriksGambar[y][x - 1][z];
-                        double kanan = matriksGambar[y][x + 1][z];
-
-                        double nilaiLama = matriksGambar[y][x][z];
-                        double nilaiBaru = (atas + bawah + kiri + kanan) / 4;
-
-                        double selisih = Math.abs(nilaiBaru - nilaiLama);
-                        if (selisih > galatTerbesar){
-                            galatTerbesar = selisih;
-                        }
-
-                        matriksGambar[y][x][z] = nilaiBaru;
-                    }
-                }
-                jumlahIterasi++;
-            }
-
-            BufferedImage gambarHasil = new BufferedImage(lebar, tinggi, BufferedImage.TYPE_INT_RGB);
-            for (int i = 0; i < tinggi; i++){
-                for (int j = 0; j < lebar; j++){
-                    int r = (int) Math.round(matriksGambar[i][j][0]);
-                    int g = (int) Math.round(matriksGambar[i][j][1]);
-                    int b = (int) Math.round(matriksGambar[i][j][2]);
-
-                    int rgb_hasil = (r << 16) | (g << 8) | b;
-                    gambarHasil.setRGB(j, i, rgb_hasil);
-
-                }
-            }
-            File fileHasil = new File(pathHasil);
-            ImageIO.write((gambarHasil), "png", fileHasil);
-            System.out.println("Restorasi berhasil! Gambar hasil disimpan di: " + fileHasil.getAbsolutePath());
-
-        } catch (IOException e){
-            System.out.println("Terjadi kesalahan saat memperbaiki gambar: " +e.getMessage());
+        boolean[][] damaged = new boolean[height][width];
+        double[][][] pixels = new double[height][width][3];
+        int damagedCount = 0;
+        for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+            damaged[y][x] = (mask.getRGB(x, y) & 0xFF) > 128;
+            if (damaged[y][x]) damagedCount++;
+            int rgb = source.getRGB(x, y);
+            pixels[y][x][0] = (rgb >> 16) & 0xFF;
+            pixels[y][x][1] = (rgb >> 8) & 0xFF;
+            pixels[y][x][2] = rgb & 0xFF;
         }
+        if (damagedCount == 0) {
+            ImageIO.write(source, "png", outputFile(outputPath));
+            return;
+        }
+        if (damagedCount == width * height) throw new IllegalArgumentException("Mask tidak boleh menandai seluruh gambar sebagai rusak.");
+
+        double[][][] next = new double[height][width][3];
+        for (int iteration = 0; iteration < 10000; iteration++) {
+            double maxChange = 0;
+            for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+                for (int c = 0; c < 3; c++) next[y][x][c] = pixels[y][x][c];
+                if (!damaged[y][x]) continue;
+                for (int c = 0; c < 3; c++) {
+                    double sum = 0; int count = 0;
+                    if (y > 0) { sum += pixels[y - 1][x][c]; count++; }
+                    if (y + 1 < height) { sum += pixels[y + 1][x][c]; count++; }
+                    if (x > 0) { sum += pixels[y][x - 1][c]; count++; }
+                    if (x + 1 < width) { sum += pixels[y][x + 1][c]; count++; }
+                    next[y][x][c] = sum / count;
+                    maxChange = Math.max(maxChange, Math.abs(next[y][x][c] - pixels[y][x][c]));
+                }
+            }
+            double[][][] swap = pixels; pixels = next; next = swap;
+            if (maxChange < 0.1) break;
+        }
+        BufferedImage restored = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+            int r = clamp(pixels[y][x][0]), g = clamp(pixels[y][x][1]), b = clamp(pixels[y][x][2]);
+            restored.setRGB(x, y, (r << 16) | (g << 8) | b);
+        }
+        if (!ImageIO.write(restored, "png", outputFile(outputPath))) throw new IOException("Tidak tersedia encoder PNG.");
     }
+
+    private static File outputFile(String path) throws IOException {
+        File out = new File(path);
+        File parent = out.getAbsoluteFile().getParentFile();
+        if (parent != null && !parent.exists() && !parent.mkdirs()) throw new IOException("Folder output tidak dapat dibuat.");
+        return out;
+    }
+    private static int clamp(double value) { return Math.max(0, Math.min(255, (int) Math.round(value))); }
 }

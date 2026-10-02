@@ -1,81 +1,39 @@
 package algeo.modules;
 
+/** Least-squares cubic spline regression using a truncated-power basis. */
 public class SplineRegression {
-    public static void calculate() {
-
-        System.out.println("Masukkan Jumlah Data:");
-        int N = Utilities.input.nextInt(); // Baca Input
-                
-        System.out.println("Masukkan K:");
-        int K = Utilities.input.nextInt(); // Baca Input
-
-        double[] array_Xi = new double[K];
-        for(int i = 0; i < K; i++){
-            System.out.println("Masukkan Knot Xi-" + (i + 1) + ":");
-            array_Xi[i] = Utilities.input.nextDouble();
+    public static Matrix fit(Matrix points, double[] knots) {
+        if (points == null || points.col != 2 || points.row == 0) throw new IllegalArgumentException("Data regresi harus memiliki baris berformat x dan y.");
+        Utilities.requireFiniteMatrix(points);
+        if (knots == null) throw new IllegalArgumentException("Daftar knot tidak boleh null.");
+        for (int i = 0; i < knots.length; i++) {
+            if (!Double.isFinite(knots[i])) throw new IllegalArgumentException("Knot harus berupa bilangan finite.");
+            for (int j = 0; j < i; j++) if (Math.abs(knots[i] - knots[j]) <= Utilities.EPS) throw new IllegalArgumentException("Knot harus berbeda.");
         }
-
-        double[] x = new double [N];
-        Matrix Y = Utilities.createMatrix(N ,1); // Menyediakan matriks
-
-        System.out.println("\nMasukkan data titik (format: x y)");
-        for(int i = 0; i < N; i++) {
-            System.out.println("Titik " + (i + 1) + ":");
-            x[i] = Utilities.input.nextDouble();
-            Y.value[i][0] = Utilities.input.nextDouble();
+        int terms = 4 + knots.length;
+        if (points.row < terms) throw new IllegalArgumentException("Jumlah data harus sekurangnya sama dengan jumlah koefisien (" + terms + ").");
+        Matrix design = new Matrix(points.row, terms), y = new Matrix(points.row, 1);
+        for (int i = 0; i < points.row; i++) {
+            double x = points.value[i][0];
+            for (int j = 0; j < 4; j++) design.value[i][j] = Math.pow(x, j);
+            for (int j = 0; j < knots.length; j++) design.value[i][4 + j] = Math.pow(Math.max(0.0, x - knots[j]), 3);
+            y.value[i][0] = points.value[i][1];
         }
+        Matrix transpose = Utilities.transposeMatrix(design);
+        Matrix normal = Utilities.matrixMultiplication(transpose, design);
+        Matrix rhs = Utilities.matrixMultiplication(transpose, y);
+        Matrix augmented = PolinomialInterpolation.createAugmentedMatrix(normal, rhs);
+        GaussElim.Result result = GaussElim.solveByGaussElim(augmented);
+        if (result.type != GaussElim.SolutionType.UNIQUE_SOLUTION) throw new IllegalArgumentException("Basis spline tidak memiliki rank penuh; koefisien regresi tidak dapat ditentukan secara unik.");
+        return result.solution;
+    }
 
-        int M = 4 + K;
-        Matrix matriksjadi = Utilities.createMatrix(N, M);
-        for(int i = 0; i < M; i++){
-            if (i <= 3) {
-                for(int j = 0; j < N; j++){
-                    matriksjadi.value[j][i] = Math.pow(x[j], i);
-                }
-            }
-            else {
-                for(int j = 0; j < N; j++){
-                    if (x[j] > array_Xi[i - 4]){
-                        matriksjadi.value[j][i] = Math.pow(x[j] - array_Xi[i - 4], 3);
-                    } else {
-                        matriksjadi.value[j][i] = 0;
-                    }
-                }
-            }
-        }
-
-        // Mentranspose matriks
-        Matrix matriksTranspose = Utilities.transposeMatrix(matriksjadi);
-
-        // Perkalian matriks transpose dengan matriks awal membentuk matriks 4 + K x m
-        Matrix matriksKali = Utilities.matrixMultiplication(matriksTranspose, matriksjadi);
-
-        // Perkalian matriks transpose dengan nilai Y
-        Matrix matriksVektor = Utilities.matrixMultiplication(matriksTranspose, Y);
-
-        // Membentuk matriks augmented dari matriksKali dan matriksVektor
-        Matrix augmented = new Matrix(M, M + 1);
-
-        for (int i = 0; i < M; i++){
-            for (int j = 0; j < M; j++){
-                augmented.value[i][j] = matriksKali.value[i][j];
-            }
-            augmented.value[i][M] = matriksVektor.value[i][0];
-        }
-
-        // Eliminasi gauss-jordan
-        Matrix hasil = GaussJordanElim.toReducedRowEchelonFormMatrix(augmented);
-
-        System.out.print("[");
-        for (int i = 0; i < 4 + K; i++){
-            if (i != 4 + K - 1 ){
-                System.out.printf("%.3f ", hasil.value[i][4 + K]);
-            }
-            else {
-                System.out.printf("%.3f", hasil.value[i][4 + K]);
-            }
-        }
-        System.out.print("]");
-    
+    public static double evaluate(double x, Matrix coefficients, double[] knots) {
+        if (coefficients == null || coefficients.col != 1 || knots == null || coefficients.row != 4 + knots.length)
+            throw new IllegalArgumentException("Dimensi koefisien dan knot tidak sesuai.");
+        double y = 0;
+        for (int i = 0; i < 4; i++) y += coefficients.value[i][0] * Math.pow(x, i);
+        for (int i = 0; i < knots.length; i++) y += coefficients.value[4 + i][0] * Math.pow(Math.max(0.0, x - knots[i]), 3);
+        return y;
     }
 }
